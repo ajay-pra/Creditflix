@@ -64,7 +64,7 @@ export const TopNav = ({ isSidebarCollapsed }) => {
     return () => clearInterval(interval);
   }, []);
 
-  const criticalIncidentsCount = incidents.filter(
+  const criticalIncidentsCount = (incidents || []).filter(
     (i) => i.severity === "critical" && i.status !== "resolved"
   ).length;
 
@@ -246,3 +246,4 @@ export const TopNav = ({ isSidebarCollapsed }) => {
     </header>
   );
 };
+

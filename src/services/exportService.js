@@ -34,3 +34,4 @@ export const exportToCSV = (filename, rows) => {
     document.body.removeChild(link);
   }
 };
+

@@ -165,3 +165,4 @@ export const HOURLY_ENERGY_CONSUMPTION = [
   { hour: "04:00", activeLoadKw: 60, expectedLoadKw: 120, ambientLux: 0 },
   { hour: "06:00", activeLoadKw: 35, expectedLoadKw: 60, ambientLux: 450 }, // Sunrise switch-off
 ];
+

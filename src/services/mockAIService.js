@@ -166,3 +166,4 @@ export const processAIQuery = (query, appState) => {
     confidence: 88
   };
 };
+

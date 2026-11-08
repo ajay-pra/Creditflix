@@ -20,19 +20,21 @@ import {
 } from "lucide-react";
 
 export const EnvironmentPage = () => {
-  const { envStations, addToast } = useApp();
-  const [selectedStation, setSelectedStation] = useState(envStations[5]); // Industrial Sector 8 (critical AQI 245)
+  const safeStations = envStations || [];
+  const [selectedStation, setSelectedStation] = useState(() => (safeStations[5] || safeStations[0] || {}));
+
+  const activeStation = safeStations.find((s) => s.id === selectedStation?.id) || selectedStation || safeStations[0] || {};
 
   // KPIs
-  const totalStations = envStations.length;
-  const avgAqi = Math.round(envStations.reduce((acc, s) => acc + s.aqi, 0) / totalStations);
-  const criticalAqiCount = envStations.filter((s) => s.aqi > 200).length;
-  const avgNoise = Math.round(envStations.reduce((acc, s) => acc + s.noiseDb, 0) / totalStations);
+  const totalStations = safeStations.length || 1;
+  const avgAqi = Math.round(safeStations.reduce((acc, s) => acc + (s.aqi || 0), 0) / totalStations);
+  const criticalAqiCount = safeStations.filter((s) => s.aqi > 200).length;
+  const avgNoise = Math.round(safeStations.reduce((acc, s) => acc + (s.noiseDb || 0), 0) / totalStations);
 
   const handleDeployAntiSmog = () => {
     addToast(
       "Anti-Smog Mist Cannon Dispatched",
-      `Municipal Mobile Water Cannon deployed to ${selectedStation.locationName || selectedStation.name} corridor.`,
+      `Municipal Mobile Water Cannon deployed to ${activeStation.locationName || activeStation.name} corridor.`,
       "success"
     );
   };
@@ -162,11 +164,11 @@ export const EnvironmentPage = () => {
           <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm space-y-4">
             <div className="flex items-center justify-between border-b border-slate-100 pb-3">
               <div>
-                <span className="font-mono text-xs font-bold text-teal-600">{selectedStation.id} CAAQMS TELEMETRY</span>
-                <h3 className="text-base font-bold text-slate-900">{selectedStation.name}</h3>
+                <span className="font-mono text-xs font-bold text-teal-600">{activeStation.id} CAAQMS TELEMETRY</span>
+                <h3 className="text-base font-bold text-slate-900">{activeStation.name}</h3>
               </div>
-              <Badge variant={selectedStation.aqi > 200 ? "critical" : selectedStation.aqi > 150 ? "warning" : "healthy"}>
-                {selectedStation.category.toUpperCase()}
+              <Badge variant={activeStation.aqi > 200 ? "critical" : activeStation.aqi > 150 ? "warning" : "healthy"}>
+                {(activeStation.category || "Moderate").toUpperCase()}
               </Badge>
             </div>
 
@@ -174,22 +176,22 @@ export const EnvironmentPage = () => {
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs">
               <div className="p-3 rounded-xl bg-slate-50 border border-slate-100">
                 <span className="text-[10px] text-slate-400 uppercase font-semibold">PM 2.5</span>
-                <div className="font-bold text-slate-900 text-lg font-mono mt-1">{selectedStation.pm25} µg/m³</div>
+                <div className="font-bold text-slate-900 text-lg font-mono mt-1">{activeStation.pm25} µg/m³</div>
                 <div className="text-[10px] text-slate-500">Standard &lt; 60</div>
               </div>
               <div className="p-3 rounded-xl bg-slate-50 border border-slate-100">
                 <span className="text-[10px] text-slate-400 uppercase font-semibold">PM 10</span>
-                <div className="font-bold text-slate-900 text-lg font-mono mt-1">{selectedStation.pm10} µg/m³</div>
+                <div className="font-bold text-slate-900 text-lg font-mono mt-1">{activeStation.pm10} µg/m³</div>
                 <div className="text-[10px] text-slate-500">Standard &lt; 100</div>
               </div>
               <div className="p-3 rounded-xl bg-slate-50 border border-slate-100">
                 <span className="text-[10px] text-slate-400 uppercase font-semibold">Nitrogen Dioxide (NO₂)</span>
-                <div className="font-bold text-slate-900 text-lg font-mono mt-1">{selectedStation.no2} ppb</div>
+                <div className="font-bold text-slate-900 text-lg font-mono mt-1">{activeStation.no2} ppb</div>
                 <div className="text-[10px] text-slate-500">Vehicular Exhaust</div>
               </div>
               <div className="p-3 rounded-xl bg-slate-50 border border-slate-100">
                 <span className="text-[10px] text-slate-400 uppercase font-semibold">Sulfur Dioxide (SO₂)</span>
-                <div className="font-bold text-slate-900 text-lg font-mono mt-1">{selectedStation.so2} ppb</div>
+                <div className="font-bold text-slate-900 text-lg font-mono mt-1">{activeStation.so2} ppb</div>
                 <div className="text-[10px] text-slate-500">Industrial Boiler</div>
               </div>
             </div>
@@ -198,15 +200,15 @@ export const EnvironmentPage = () => {
             <div className="grid grid-cols-3 gap-3 text-xs pt-1 border-t border-slate-100">
               <div className="flex items-center gap-2 text-slate-700">
                 <Thermometer className="h-4 w-4 text-rose-500" />
-                <span>Ambient Temp: <strong>{selectedStation.tempC}°C</strong></span>
+                <span>Ambient Temp: <strong>{activeStation.tempC}°C</strong></span>
               </div>
               <div className="flex items-center gap-2 text-slate-700">
                 <CloudRain className="h-4 w-4 text-blue-500" />
-                <span>Humidity: <strong>{selectedStation.humidityPct}%</strong></span>
+                <span>Humidity: <strong>{activeStation.humidityPct}%</strong></span>
               </div>
               <div className="flex items-center gap-2 text-slate-700">
                 <Compass className="h-4 w-4 text-indigo-500" />
-                <span>Wind: <strong>{selectedStation.windSpeedKmph} km/h {selectedStation.windDirection}</strong></span>
+                <span>Wind: <strong>{activeStation.windSpeedKmph} km/h {activeStation.windDirection}</strong></span>
               </div>
             </div>
           </div>
@@ -251,3 +253,4 @@ export const EnvironmentPage = () => {
     </div>
   );
 };
+

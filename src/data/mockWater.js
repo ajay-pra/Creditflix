@@ -167,3 +167,4 @@ export const HOURLY_WATER_CONSUMPTION = [
   { hour: "20:00", demandML: 8.1, pressureAvg: 3.3 },
   { hour: "22:00", demandML: 3.2, pressureAvg: 4.0 },
 ];
+

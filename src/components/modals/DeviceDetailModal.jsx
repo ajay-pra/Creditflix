@@ -181,3 +181,4 @@ export const DeviceDetailModal = ({ isOpen, onClose, device, onTriggerActuator }
     </Modal>
   );
 };
+

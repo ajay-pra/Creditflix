@@ -17,18 +17,20 @@ import {
 } from "lucide-react";
 
 export const InfrastructurePage = () => {
-  const { infraAssets, addToast } = useApp();
-  const [selectedAsset, setSelectedAsset] = useState(infraAssets[3]); // Cyber City Expressway Flyover (Grade C)
+  const safeAssets = infraAssets || [];
+  const [selectedAsset, setSelectedAsset] = useState(() => (safeAssets[3] || safeAssets[0] || {}));
   const [typeFilter, setTypeFilter] = useState("all");
 
-  const totalAssets = infraAssets.length;
-  const gradeACount = infraAssets.filter((a) => a.conditionGrade === "A").length;
-  const gradeCCount = infraAssets.filter((a) => a.conditionGrade === "C" || a.conditionGrade === "D").length;
-  const avgHealthIndex = Math.round(infraAssets.reduce((acc, a) => acc + a.structuralHealthIndex, 0) / totalAssets);
+  const activeAsset = safeAssets.find((a) => a.id === selectedAsset?.id) || selectedAsset || safeAssets[0] || {};
 
-  const filteredAssets = infraAssets.filter((a) => {
+  const totalAssets = safeAssets.length || 1;
+  const gradeACount = safeAssets.filter((a) => a.conditionGrade === "A").length;
+  const gradeCCount = safeAssets.filter((a) => a.conditionGrade === "C" || a.conditionGrade === "D").length;
+  const avgHealthIndex = Math.round(safeAssets.reduce((acc, a) => acc + (a.structuralHealthIndex || 0), 0) / totalAssets);
+
+  const filteredAssets = safeAssets.filter((a) => {
     if (typeFilter === "all") return true;
-    return a.type.toLowerCase().includes(typeFilter.toLowerCase());
+    return (a.type || "").toLowerCase().includes(typeFilter.toLowerCase());
   });
 
   const handleCreateWorkOrder = (asset) => {
@@ -47,7 +49,7 @@ export const InfrastructurePage = () => {
         actions={
           <div className="flex items-center gap-2">
             <button
-              onClick={() => handleCreateWorkOrder(selectedAsset)}
+              onClick={() => handleCreateWorkOrder(activeAsset)}
               className="flex items-center gap-1.5 px-3.5 py-1.5 text-xs font-semibold rounded-xl bg-blue-600 hover:bg-blue-700 text-white shadow-sm transition"
             >
               <Hammer className="h-3.5 w-3.5" />
@@ -186,29 +188,29 @@ export const InfrastructurePage = () => {
         <div className="lg:col-span-5 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm space-y-4">
           <div className="flex items-center justify-between border-b border-slate-100 pb-3">
             <div>
-              <span className="font-mono text-xs font-bold text-blue-600">{selectedAsset.id} DOSSIER</span>
-              <h3 className="text-sm font-bold text-slate-900">{selectedAsset.name}</h3>
+              <span className="font-mono text-xs font-bold text-blue-600">{activeAsset.id} DOSSIER</span>
+              <h3 className="text-sm font-bold text-slate-900">{activeAsset.name}</h3>
             </div>
             <span
               className={`px-2.5 py-1 text-xs font-bold rounded-lg ${
-                selectedAsset.conditionGrade === "A"
+                activeAsset.conditionGrade === "A"
                   ? "bg-emerald-100 text-emerald-800"
-                  : selectedAsset.conditionGrade === "B"
+                  : activeAsset.conditionGrade === "B"
                   ? "bg-blue-100 text-blue-800"
                   : "bg-amber-100 text-amber-800"
               }`}
             >
-              Grade {selectedAsset.conditionGrade}
+              Grade {activeAsset.conditionGrade || "A"}
             </span>
           </div>
 
           <div className="space-y-3 text-xs">
             <div className="p-3 rounded-xl bg-slate-50 border border-slate-100 space-y-1">
               <div className="text-slate-400 font-medium">Responsible Authority & Inspection</div>
-              <div className="font-bold text-slate-900">{selectedAsset.responsibleDept}</div>
-              <div className="text-slate-600">Nodal Engineer: <strong>{selectedAsset.assignedEngineer}</strong></div>
+              <div className="font-bold text-slate-900">{activeAsset.responsibleDept}</div>
+              <div className="text-slate-600">Nodal Engineer: <strong>{activeAsset.assignedEngineer}</strong></div>
               <div className="text-slate-500 text-[11px] pt-1">
-                Last Inspection: {selectedAsset.lastInspection} • Next Due: <strong>{selectedAsset.nextInspectionDue}</strong>
+                Last Inspection: {activeAsset.lastInspection} • Next Due: <strong>{activeAsset.nextInspectionDue}</strong>
               </div>
             </div>
 
@@ -217,14 +219,14 @@ export const InfrastructurePage = () => {
               <div className="p-3 rounded-xl bg-slate-50 border border-slate-100">
                 <span className="text-[10px] text-slate-400 uppercase font-semibold">Peak Vibration</span>
                 <div className="font-bold text-slate-900 text-base font-mono mt-0.5">
-                  {selectedAsset.metrics?.peakVibrationG || 0.015} g
+                  {activeAsset.metrics?.peakVibrationG || 0.015} g
                 </div>
                 <div className="text-[10px] text-slate-500">MEMS Accelerometer</div>
               </div>
               <div className="p-3 rounded-xl bg-slate-50 border border-slate-100">
                 <span className="text-[10px] text-slate-400 uppercase font-semibold">Tilt Excursion</span>
                 <div className="font-bold text-slate-900 text-base font-mono mt-0.5">
-                  {selectedAsset.metrics?.tiltDegrees || 0.02}°
+                  {activeAsset.metrics?.tiltDegrees || 0.02}°
                 </div>
                 <div className="text-[10px] text-slate-500">Biaxial Inclinometer</div>
               </div>
@@ -233,7 +235,7 @@ export const InfrastructurePage = () => {
             {/* Work order trigger */}
             <div className="pt-2">
               <button
-                onClick={() => handleCreateWorkOrder(selectedAsset)}
+                onClick={() => handleCreateWorkOrder(activeAsset)}
                 className="w-full flex items-center justify-center gap-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-white py-2.5 text-xs font-semibold shadow transition"
               >
                 <Hammer className="h-4 w-4" />
@@ -246,3 +248,4 @@ export const InfrastructurePage = () => {
     </div>
   );
 };
+

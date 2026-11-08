@@ -44,7 +44,7 @@ export const ReportsPage = () => {
   ];
 
   const handleExportIncidentsCSV = () => {
-    const rows = incidents.map((i) => ({
+    const rows = (incidents || []).map((i) => ({
       ID: i.id,
       Title: i.title,
       Severity: i.severity,
@@ -61,7 +61,7 @@ export const ReportsPage = () => {
   };
 
   const handleExportDevicesCSV = () => {
-    const rows = devices.map((d) => ({
+    const rows = (devices || []).map((d) => ({
       DeviceID: d.id,
       Name: d.name,
       Category: d.category,
@@ -254,3 +254,4 @@ export const ReportsPage = () => {
     </div>
   );
 };
+

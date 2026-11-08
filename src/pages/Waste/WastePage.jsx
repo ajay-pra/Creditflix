@@ -31,20 +31,24 @@ export const WastePage = () => {
     addToast
   } = useApp();
 
+  const safeBins = wasteBins || [];
+  const safeVehicles = vehicles || [];
   const [filterType, setFilterType] = useState("all");
-  const [selectedVehicle, setSelectedVehicle] = useState(vehicles[0]);
+  const [selectedVehicle, setSelectedVehicle] = useState(() => (safeVehicles[0] || {}));
   const [isGeneratingRoute, setIsGeneratingRoute] = useState(false);
 
+  const activeVeh = safeVehicles.find((v) => v.id === selectedVehicle?.id) || selectedVehicle || safeVehicles[0] || {};
+
   // KPIs
-  const totalBins = wasteBins.length;
-  const criticalBins = wasteBins.filter((b) => b.fillLevel >= 90).length;
-  const warningBins = wasteBins.filter((b) => b.fillLevel >= 75 && b.fillLevel < 90).length;
-  const normalBins = wasteBins.filter((b) => b.fillLevel < 75).length;
-  const activeVehiclesCount = vehicles.filter((v) => v.status === "in-transit" || v.status === "collecting").length;
-  const totalTonsCollectedToday = +(vehicles.reduce((acc, v) => acc + (v.currentLoadTons || 0), 0) + 24.5).toFixed(1);
+  const totalBins = safeBins.length;
+  const criticalBins = safeBins.filter((b) => b.fillLevel >= 90).length;
+  const warningBins = safeBins.filter((b) => b.fillLevel >= 75 && b.fillLevel < 90).length;
+  const normalBins = safeBins.filter((b) => b.fillLevel < 75).length;
+  const activeVehiclesCount = safeVehicles.filter((v) => v.status === "in-transit" || v.status === "collecting").length;
+  const totalTonsCollectedToday = +(safeVehicles.reduce((acc, v) => acc + (v.currentLoadTons || 0), 0) + 24.5).toFixed(1);
 
   // Filtered bins
-  const filteredBins = wasteBins.filter((b) => {
+  const filteredBins = safeBins.filter((b) => {
     if (filterType === "all") return true;
     if (filterType === "critical") return b.fillLevel >= 90;
     if (filterType === "warning") return b.fillLevel >= 75;
@@ -55,12 +59,13 @@ export const WastePage = () => {
   const handleGenerateRoute = () => {
     setIsGeneratingRoute(true);
     setTimeout(() => {
-      const route = calculateOptimizedRoute(selectedVehicle, wasteBins, 8);
+      const target = activeVeh.id ? activeVeh : (safeVehicles[0] || {});
+      const route = calculateOptimizedRoute(target, safeBins, 8);
       setActiveRoute(route);
       setIsGeneratingRoute(false);
       addToast(
         "AI Dynamic Route Dispatched",
-        `Optimized collection path generated for ${selectedVehicle.regNumber} (${route.stops.length} priority bins, ${route.totalDistanceKm} km).`,
+        `Optimized collection path generated for ${target.regNumber} (${route.stops.length} priority bins, ${route.totalDistanceKm} km).`,
         "success"
       );
     }, 600);
@@ -372,3 +377,4 @@ export const WastePage = () => {
     </div>
   );
 };
+

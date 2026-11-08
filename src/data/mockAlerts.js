@@ -223,3 +223,4 @@ export const INITIAL_INCIDENTS = [
     recommendedAction: "Complete barcoded manifests transfer to Central Incinerator."
   }
 ];
+

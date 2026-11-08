@@ -57,12 +57,20 @@ export const OverviewPage = () => {
   const [actuatorModalData, setActuatorModalData] = useState(null);
   const [sensorCategoryFilter, setSensorCategoryFilter] = useState("all");
 
-  // KPI Calculations
-  const totalDevicesCount = devices.length;
-  const activeSensorsCount = devices.filter((d) => d.status === "online" && !d.isActuator).length;
-  const offlineDevicesCount = devices.filter((d) => d.status === "offline" || d.status === "warning").length;
-  const activeAlertsCount = incidents.filter((i) => i.status !== "resolved" && i.status !== "closed").length;
-  const criticalIncidentsCount = incidents.filter((i) => i.severity === "critical" && i.status !== "resolved").length;
+  // KPI Calculations with safe fallbacks
+  const safeDevices = devices || [];
+  const safeIncidents = incidents || [];
+  const safeIrrigation = irrigationZones || [];
+  const safeWasteBins = wasteBins || [];
+  const safeVehicles = vehicles || [];
+  const safeIntersections = intersections || [];
+  const safeWater = waterPoints || [];
+
+  const totalDevicesCount = safeDevices.length;
+  const activeSensorsCount = safeDevices.filter((d) => d.status === "online" && !d.isActuator).length;
+  const offlineDevicesCount = safeDevices.filter((d) => d.status === "offline" || d.status === "warning").length;
+  const activeAlertsCount = safeIncidents.filter((i) => i.status !== "resolved" && i.status !== "closed").length;
+  const criticalIncidentsCount = safeIncidents.filter((i) => i.severity === "critical" && i.status !== "resolved").length;
 
   // Sector Health status list
   const sectorHealth = [
@@ -77,13 +85,13 @@ export const OverviewPage = () => {
   ];
 
   // Recent Live Sensor Readings Feed
-  const recentSensors = devices
+  const recentSensors = safeDevices
     .filter((d) => !d.isActuator)
     .filter((d) => (sensorCategoryFilter === "all" ? true : d.category === sensorCategoryFilter))
     .slice(0, 7);
 
   // Active Critical Incidents
-  const activeIncidents = incidents.filter((i) => i.status !== "resolved" && i.status !== "closed").slice(0, 5);
+  const activeIncidents = safeIncidents.filter((i) => i.status !== "resolved" && i.status !== "closed").slice(0, 5);
 
   return (
     <div className="space-y-6">
@@ -162,7 +170,7 @@ export const OverviewPage = () => {
         />
         <StatCard
           title="Irrigation Zones"
-          value={`${irrigationZones.filter(z => z.pumpRunning).length} / ${irrigationZones.length}`}
+          value={`${safeIrrigation.filter(z => z.pumpRunning).length} / ${safeIrrigation.length}`}
           subtext="Pumping"
           icon={Sprout}
           trend="Zone 3 Critical"
@@ -172,7 +180,7 @@ export const OverviewPage = () => {
         />
         <StatCard
           title="Waste Fleet"
-          value={`${vehicles.filter(v => v.status === "in-transit" || v.status === "collecting").length} / ${vehicles.length}`}
+          value={`${safeVehicles.filter(v => v.status === "in-transit" || v.status === "collecting").length} / ${safeVehicles.length}`}
           subtext="Active"
           icon={Trash2}
           trend="3 Bins ≥90%"
@@ -182,7 +190,7 @@ export const OverviewPage = () => {
         />
         <StatCard
           title="Traffic Junctions"
-          value={`${intersections.filter(i => i.congestionLevel === "Severe").length} / ${intersections.length}`}
+          value={`${safeIntersections.filter(i => i.congestionLevel === "Severe").length} / ${safeIntersections.length}`}
           subtext="Congested"
           icon={Car}
           trend="Avg 31 km/h"
@@ -192,7 +200,7 @@ export const OverviewPage = () => {
         />
         <StatCard
           title="Water Network"
-          value={`${waterPoints.filter(w => w.status === "optimal").length} / ${waterPoints.length}`}
+          value={`${safeWater.filter(w => w.status === "optimal").length} / ${safeWater.length}`}
           subtext="Optimal"
           icon={Droplets}
           trend="1 Leak Flag"
@@ -324,7 +332,7 @@ export const OverviewPage = () => {
           </div>
 
           <div className="space-y-3 max-h-[460px] overflow-y-auto pr-1">
-            {aiRecommendations
+            {(aiRecommendations || [])
               .filter((r) => !r.dismissed)
               .slice(0, 4)
               .map((rec) => (
@@ -605,3 +613,4 @@ export const OverviewPage = () => {
     </div>
   );
 };
+

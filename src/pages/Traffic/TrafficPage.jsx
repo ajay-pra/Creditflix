@@ -28,16 +28,19 @@ export const TrafficPage = () => {
     addToast
   } = useApp();
 
-  const [selectedIntersection, setSelectedIntersection] = useState(intersections[1]); // Junction 02 (Chowk Clock Tower - congested)
+  const safeIntersections = intersections || [];
+  const [selectedIntersection, setSelectedIntersection] = useState(() => (safeIntersections[1] || safeIntersections[0] || {}));
+
+  const activeInt = safeIntersections.find((i) => i.id === selectedIntersection?.id) || selectedIntersection || safeIntersections[0] || {};
 
   // KPIs
-  const totalIntersections = intersections.length;
-  const severeCongestionCount = intersections.filter((i) => i.congestionLevel === "Severe").length;
+  const totalIntersections = safeIntersections.length || 1;
+  const severeCongestionCount = safeIntersections.filter((i) => i.congestionLevel === "Severe").length;
   const avgDensity = Math.round(
-    intersections.reduce((acc, i) => acc + i.trafficDensityPct, 0) / totalIntersections
+    safeIntersections.reduce((acc, i) => acc + (i.trafficDensityPct || 0), 0) / totalIntersections
   );
   const avgSpeed = Math.round(
-    intersections.reduce((acc, i) => acc + i.avgSpeedKmph, 0) / totalIntersections
+    safeIntersections.reduce((acc, i) => acc + (i.avgSpeedKmph || 0), 0) / totalIntersections
   );
 
   // Extend Green Phase Action
@@ -82,7 +85,7 @@ export const TrafficPage = () => {
         actions={
           <div className="flex items-center gap-2">
             <button
-              onClick={() => handleExtendGreen(selectedIntersection.id, 20)}
+              onClick={() => handleExtendGreen(activeInt.id, 20)}
               className="flex items-center gap-1.5 px-3.5 py-1.5 text-xs font-semibold rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white shadow-sm transition"
             >
               <Zap className="h-3.5 w-3.5" />
@@ -211,18 +214,18 @@ export const TrafficPage = () => {
           <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm space-y-4">
             <div className="flex items-center justify-between border-b border-slate-100 pb-3">
               <div>
-                <span className="font-mono text-xs font-bold text-blue-600">{selectedIntersection.id} SCATS SIMULATOR</span>
-                <h3 className="text-base font-bold text-slate-900">{selectedIntersection.name}</h3>
+                <span className="font-mono text-xs font-bold text-blue-600">{activeInt.id} SCATS SIMULATOR</span>
+                <h3 className="text-base font-bold text-slate-900">{activeInt.name}</h3>
               </div>
               <button
-                onClick={() => handleToggleSignalMode(selectedIntersection.id)}
+                onClick={() => handleToggleSignalMode(activeInt.id)}
                 className={`px-3 py-1 text-xs font-semibold rounded-lg border transition ${
-                  selectedIntersection.controlMode === "auto"
+                  activeInt.controlMode === "auto"
                     ? "bg-purple-100 text-purple-800 border-purple-200"
                     : "bg-slate-100 text-slate-700 border-slate-200"
                 }`}
               >
-                Control Mode: {selectedIntersection.controlMode.toUpperCase()}
+                Control Mode: {(activeInt.controlMode || "auto").toUpperCase()}
               </button>
             </div>
 
@@ -232,7 +235,7 @@ export const TrafficPage = () => {
               <div className="flex flex-col items-center justify-center p-3 rounded-xl bg-slate-900 border border-slate-800 space-y-3">
                 <div
                   className={`h-10 w-10 rounded-full border-2 border-slate-700 flex items-center justify-center transition-all ${
-                    selectedIntersection.signalStatus === "RED"
+                    activeInt.signalStatus === "RED"
                       ? "bg-rose-600 border-rose-400 shadow-lg shadow-rose-600/50"
                       : "bg-rose-950/40 opacity-30"
                   }`}
@@ -241,7 +244,7 @@ export const TrafficPage = () => {
                 </div>
                 <div
                   className={`h-10 w-10 rounded-full border-2 border-slate-700 flex items-center justify-center transition-all ${
-                    selectedIntersection.signalStatus === "YELLOW"
+                    activeInt.signalStatus === "YELLOW"
                       ? "bg-amber-500 border-amber-300 shadow-lg shadow-amber-500/50"
                       : "bg-amber-950/40 opacity-30"
                   }`}
@@ -250,7 +253,7 @@ export const TrafficPage = () => {
                 </div>
                 <div
                   className={`h-10 w-10 rounded-full border-2 border-slate-700 flex items-center justify-center transition-all ${
-                    selectedIntersection.signalStatus === "GREEN"
+                    activeInt.signalStatus === "GREEN"
                       ? "bg-emerald-500 border-emerald-300 shadow-lg shadow-emerald-500/50"
                       : "bg-emerald-950/40 opacity-30"
                   }`}
@@ -264,22 +267,22 @@ export const TrafficPage = () => {
                 <div>
                   <div className="text-xs text-slate-400 font-medium">PHASE COUNTDOWN</div>
                   <div className="text-4xl font-extrabold font-mono text-emerald-400 mt-1">
-                    {selectedIntersection.signalTimerRemaining} <span className="text-sm text-slate-400 font-sans">seconds</span>
+                    {activeInt.signalTimerRemaining} <span className="text-sm text-slate-400 font-sans">seconds</span>
                   </div>
                   <div className="text-xs text-slate-400 mt-1">
-                    Cycle Duration: {selectedIntersection.signalCycleDuration}s • North-South: {selectedIntersection.greenTimeAllocation.NorthSouth}s
+                    Cycle Duration: {activeInt.signalCycleDuration}s • North-South: {activeInt.greenTimeAllocation?.NorthSouth || 45}s
                   </div>
                 </div>
 
                 <div className="flex items-center gap-2 pt-2 border-t border-slate-800">
                   <button
-                    onClick={() => handleExtendGreen(selectedIntersection.id, 15)}
+                    onClick={() => handleExtendGreen(activeInt.id, 15)}
                     className="flex-1 rounded-xl bg-blue-600 hover:bg-blue-700 text-white py-2 text-xs font-semibold shadow transition"
                   >
                     +15s Green Split
                   </button>
                   <button
-                    onClick={() => handleExtendGreen(selectedIntersection.id, 30)}
+                    onClick={() => handleExtendGreen(activeInt.id, 30)}
                     className="flex-1 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white py-2 text-xs font-semibold shadow transition"
                   >
                     +30s Green Split
@@ -303,7 +306,7 @@ export const TrafficPage = () => {
               </span>
             </div>
             <p className="text-xs text-purple-900 leading-relaxed font-medium bg-white/70 p-3 rounded-xl border border-purple-100">
-              <strong>Peak Forecast Notice:</strong> Traffic density around {selectedIntersection.name} will reach 95%
+              <strong>Peak Forecast Notice:</strong> Traffic density around {activeInt.name} will reach 95%
               between 17:30 and 19:30. SCATS controller is recommended to prolong East-West arterial green
               duration by 18 seconds to prevent spillback onto the Metro Viaduct.
             </p>
@@ -328,3 +331,4 @@ export const TrafficPage = () => {
     </div>
   );
 };
+

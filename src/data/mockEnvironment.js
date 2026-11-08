@@ -182,3 +182,4 @@ export const HOURLY_AQI_TRENDS = [
   { hour: "18:00", avgAqi: 165, pm25: 76, pm10: 138 }, // Evening commute peak
   { hour: "21:00", avgAqi: 152, pm25: 68, pm10: 124 },
 ];
+

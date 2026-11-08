@@ -29,13 +29,14 @@ export const IncidentsPage = () => {
   const [searchQuery, setSearchQuery] = useState("");
 
   // KPIs
-  const totalIncidents = incidents.length;
-  const criticalCount = incidents.filter((i) => i.severity === "critical" && i.status !== "resolved").length;
-  const assignedCount = incidents.filter((i) => i.status === "assigned" || i.status === "in-progress").length;
-  const resolvedCount = incidents.filter((i) => i.status === "resolved" || i.status === "closed").length;
+  const safeIncidents = incidents || [];
+  const totalIncidents = safeIncidents.length;
+  const criticalCount = safeIncidents.filter((i) => i.severity === "critical" && i.status !== "resolved").length;
+  const assignedCount = safeIncidents.filter((i) => i.status === "assigned" || i.status === "in-progress").length;
+  const resolvedCount = safeIncidents.filter((i) => i.status === "resolved" || i.status === "closed").length;
 
   // Filtered incidents
-  const filteredIncidents = incidents.filter((i) => {
+  const filteredIncidents = safeIncidents.filter((i) => {
     if (statusFilter !== "all" && i.status !== statusFilter) return false;
     if (severityFilter !== "all" && i.severity !== severityFilter) return false;
     if (deptFilter !== "all" && i.department !== deptFilter) return false;
@@ -263,3 +264,4 @@ export const IncidentsPage = () => {
     </div>
   );
 };
+

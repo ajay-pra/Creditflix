@@ -95,3 +95,4 @@ export const DISTRICT_ZONES = [
     activeAlerts: 1
   }
 ];
+

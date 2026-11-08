@@ -185,3 +185,4 @@ export const INITIAL_INFRA_ASSETS = [
     status: "optimal"
   }
 ];
+

@@ -26,16 +26,19 @@ export const WaterPage = () => {
     addToast
   } = useApp();
 
-  const [selectedPoint, setSelectedPoint] = useState(waterPoints[4]); // Central Chowk Section 12 (leak anomaly)
+  const safeWater = waterPoints || [];
+  const [selectedPoint, setSelectedPoint] = useState(() => (safeWater[4] || safeWater[0] || {}));
   const [actuatorModalData, setActuatorModalData] = useState(null);
 
+  const activePoint = safeWater.find((w) => w.id === selectedPoint?.id) || selectedPoint || safeWater[0] || {};
+
   // KPIs
-  const totalPoints = waterPoints.length;
-  const anomalyCount = waterPoints.filter((w) => w.status === "anomaly" || w.status === "warning").length;
-  const primaryReservoir = waterPoints[0];
+  const totalPoints = safeWater.length || 1;
+  const anomalyCount = safeWater.filter((w) => w.status === "anomaly" || w.status === "warning").length;
+  const primaryReservoir = safeWater[0] || {};
   const avgPressure = +(
-    waterPoints.filter((w) => w.pressureBar).reduce((acc, w) => acc + w.pressureBar, 0) /
-    (waterPoints.filter((w) => w.pressureBar).length || 1)
+    safeWater.filter((w) => w.pressureBar).reduce((acc, w) => acc + (w.pressureBar || 0), 0) /
+    (safeWater.filter((w) => w.pressureBar).length || 1)
   ).toFixed(1);
 
   const handleTogglePump = (point) => {
@@ -77,13 +80,13 @@ export const WaterPage = () => {
         actions={
           <div className="flex items-center gap-2">
             <button
-              onClick={() => handleTogglePump(selectedPoint)}
+              onClick={() => handleTogglePump(activePoint)}
               className={`flex items-center gap-1.5 px-3.5 py-1.5 text-xs font-semibold rounded-xl text-white shadow-sm transition ${
-                selectedPoint.pumpActive ? "bg-rose-600 hover:bg-rose-700" : "bg-blue-600 hover:bg-blue-700"
+                activePoint.pumpActive ? "bg-rose-600 hover:bg-rose-700" : "bg-blue-600 hover:bg-blue-700"
               }`}
             >
               <Power className="h-3.5 w-3.5" />
-              <span>{selectedPoint.pumpActive ? "Halt Booster Pump" : "Start Booster Pump"}</span>
+              <span>{activePoint.pumpActive ? "Halt Booster Pump" : "Start Booster Pump"}</span>
             </button>
           </div>
         }
@@ -199,7 +202,7 @@ export const WaterPage = () => {
         {/* Right: Water Anomaly & SCADA Actuator Controls (7 cols) */}
         <div className="lg:col-span-7 space-y-6">
           {/* Anomaly Highlight Box if Leakage flagged */}
-          {selectedPoint.leakageProbabilityPct && (
+          {activePoint.leakageProbabilityPct && (
             <div className="rounded-2xl border border-rose-300 bg-rose-50/40 p-5 shadow-sm space-y-3">
               <div className="flex items-center justify-between border-b border-rose-200 pb-2">
                 <div className="flex items-center gap-2">
@@ -209,21 +212,21 @@ export const WaterPage = () => {
                   </h4>
                 </div>
                 <span className="text-xs font-mono font-bold text-rose-800 bg-rose-100 px-2 py-0.5 rounded">
-                  {selectedPoint.leakageProbabilityPct}% Rupture Probability
+                  {activePoint.leakageProbabilityPct}% Rupture Probability
                 </span>
               </div>
               <p className="text-xs text-rose-900 leading-relaxed font-medium">
-                {selectedPoint.alertNote || "Significant pressure drop accompanied by flow divergence detected."}
+                {activePoint.alertNote || "Significant pressure drop accompanied by flow divergence detected."}
               </p>
               <div className="flex items-center gap-3 pt-2">
                 <button
-                  onClick={() => handleAdjustValve(selectedPoint.id, 50)}
+                  onClick={() => handleAdjustValve(activePoint.id, 50)}
                   className="rounded-lg bg-rose-600 hover:bg-rose-700 text-white px-3.5 py-1.5 text-xs font-semibold shadow-sm transition"
                 >
                   Throttle Valve to 50%
                 </button>
                 <button
-                  onClick={() => handleAdjustValve(selectedPoint.id, 0)}
+                  onClick={() => handleAdjustValve(activePoint.id, 0)}
                   className="rounded-lg bg-slate-800 hover:bg-slate-900 text-white px-3.5 py-1.5 text-xs font-semibold shadow-sm transition"
                 >
                   Emergency Valve Shutoff
@@ -236,11 +239,11 @@ export const WaterPage = () => {
           <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm space-y-4">
             <div className="flex items-center justify-between border-b border-slate-100 pb-3">
               <div>
-                <span className="font-mono text-xs font-bold text-blue-600">{selectedPoint.id} SCADA INTERFACE</span>
-                <h3 className="text-base font-bold text-slate-900">{selectedPoint.name}</h3>
+                <span className="font-mono text-xs font-bold text-blue-600">{activePoint.id} SCADA INTERFACE</span>
+                <h3 className="text-base font-bold text-slate-900">{activePoint.name}</h3>
               </div>
-              <Badge variant={selectedPoint.status === "optimal" ? "healthy" : "critical"}>
-                {selectedPoint.status.toUpperCase()}
+              <Badge variant={activePoint.status === "optimal" ? "healthy" : "critical"}>
+                {(activePoint.status || "optimal").toUpperCase()}
               </Badge>
             </div>
 
@@ -248,27 +251,27 @@ export const WaterPage = () => {
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs">
               <div className="p-3 rounded-xl bg-slate-50 border border-slate-100">
                 <span className="text-[10px] text-slate-400 uppercase font-semibold">pH Factor</span>
-                <div className="font-bold text-slate-900 text-base font-mono mt-1">{selectedPoint.ph || "7.2"}</div>
+                <div className="font-bold text-slate-900 text-base font-mono mt-1">{activePoint.ph || "7.2"}</div>
                 <div className="text-[10px] text-slate-500">IS Standard 6.5 - 8.5</div>
               </div>
               <div className="p-3 rounded-xl bg-slate-50 border border-slate-100">
                 <span className="text-[10px] text-slate-400 uppercase font-semibold">Turbidity</span>
                 <div className="font-bold text-slate-900 text-base font-mono mt-1">
-                  {selectedPoint.turbidityNtu ? `${selectedPoint.turbidityNtu} NTU` : "1.2 NTU"}
+                  {activePoint.turbidityNtu ? `${activePoint.turbidityNtu} NTU` : "1.2 NTU"}
                 </div>
                 <div className="text-[10px] text-emerald-600 font-semibold">Clear Potable</div>
               </div>
               <div className="p-3 rounded-xl bg-slate-50 border border-slate-100">
                 <span className="text-[10px] text-slate-400 uppercase font-semibold">Flow Rate</span>
                 <div className="font-bold text-slate-900 text-base font-mono mt-1">
-                  {selectedPoint.flowRateM3h} m³/h
+                  {activePoint.flowRateM3h || 400} m³/h
                 </div>
                 <div className="text-[10px] text-slate-500">Ultrasonic Meter</div>
               </div>
               <div className="p-3 rounded-xl bg-slate-50 border border-slate-100">
                 <span className="text-[10px] text-slate-400 uppercase font-semibold">Valve Opening</span>
                 <div className="font-bold text-slate-900 text-base font-mono mt-1">
-                  {selectedPoint.valveOpenPct || 80}%
+                  {activePoint.valveOpenPct || 80}%
                 </div>
                 <div className="text-[10px] text-slate-500">Motorized RTU</div>
               </div>
@@ -278,14 +281,14 @@ export const WaterPage = () => {
             <div className="space-y-2 pt-2">
               <div className="flex items-center justify-between text-xs">
                 <span className="font-semibold text-slate-700">Aperture Throttle Position</span>
-                <span className="font-mono font-bold text-blue-700">{selectedPoint.valveOpenPct || 80}%</span>
+                <span className="font-mono font-bold text-blue-700">{activePoint.valveOpenPct || 80}%</span>
               </div>
               <input
                 type="range"
                 min="0"
                 max="100"
-                value={selectedPoint.valveOpenPct || 80}
-                onChange={(e) => handleAdjustValve(selectedPoint.id, Number(e.target.value))}
+                value={activePoint.valveOpenPct || 80}
+                onChange={(e) => handleAdjustValve(activePoint.id, Number(e.target.value))}
                 className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-600"
               />
             </div>
@@ -318,3 +321,4 @@ export const WaterPage = () => {
     </div>
   );
 };
+

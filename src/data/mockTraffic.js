@@ -168,3 +168,4 @@ export const HOURLY_TRAFFIC_TRENDS = [
   { hour: "20:30", densityPct: 71, avgSpeed: 32, vehiclesTotal: 5800 },
   { hour: "22:00", densityPct: 41, avgSpeed: 48, vehiclesTotal: 3200 },
 ];
+

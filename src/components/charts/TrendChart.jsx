@@ -94,3 +94,4 @@ export const TrendChart = ({
     </div>
   );
 };
+

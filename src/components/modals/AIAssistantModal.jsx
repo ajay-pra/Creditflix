@@ -176,3 +176,4 @@ export const AIAssistantModal = ({ isOpen, onClose }) => {
     </Modal>
   );
 };
+

@@ -249,3 +249,4 @@ export const INITIAL_VEHICLES = [
     fuelBatteryPct: 45
   }
 ];
+

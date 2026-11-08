@@ -194,3 +194,4 @@ export const CreateIncidentModal = ({ isOpen, onClose }) => {
     </Modal>
   );
 };
+

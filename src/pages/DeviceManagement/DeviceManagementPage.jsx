@@ -29,13 +29,14 @@ export const DeviceManagementPage = () => {
   const [searchQuery, setSearchQuery] = useState("");
 
   // KPIs
-  const totalCount = devices.length;
-  const onlineCount = devices.filter((d) => d.status === "online").length;
-  const warningCount = devices.filter((d) => d.status === "warning").length;
-  const actuatorCount = devices.filter((d) => d.isActuator).length;
+  const safeDevices = devices || [];
+  const totalCount = safeDevices.length;
+  const onlineCount = safeDevices.filter((d) => d.status === "online").length;
+  const warningCount = safeDevices.filter((d) => d.status === "warning").length;
+  const actuatorCount = safeDevices.filter((d) => d.isActuator).length;
 
   // Filtered devices
-  const filteredDevices = devices.filter((d) => {
+  const filteredDevices = safeDevices.filter((d) => {
     if (categoryFilter !== "all" && d.category !== categoryFilter) return false;
     if (statusFilter !== "all" && d.status !== statusFilter) return false;
     if (
@@ -238,3 +239,4 @@ export const DeviceManagementPage = () => {
     </div>
   );
 };
+

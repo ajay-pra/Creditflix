@@ -209,3 +209,4 @@ export const simulateNextState = (prevState) => {
     envStations: nextEnv
   };
 };
+

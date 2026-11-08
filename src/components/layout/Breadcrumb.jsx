@@ -32,3 +32,4 @@ export const Breadcrumb = ({ title, subtitle, actions }) => {
     </div>
   );
 };
+

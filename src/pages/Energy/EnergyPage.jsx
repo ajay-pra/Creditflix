@@ -25,8 +25,11 @@ export const EnergyPage = () => {
     addToast
   } = useApp();
 
-  const [selectedFeeder, setSelectedFeeder] = useState(lightingFeeders[3]); // Feeder 04 (warning, 4 faulty lamps)
+  const safeFeeders = lightingFeeders || [];
+  const [selectedFeeder, setSelectedFeeder] = useState(() => (safeFeeders[3] || safeFeeders[0] || {}));
   const [globalBrightness, setGlobalBrightness] = useState(0); // daytime 0%
+
+  const activeFeeder = safeFeeders.find((f) => f.id === selectedFeeder?.id) || selectedFeeder || safeFeeders[0] || {};
 
   const handleToggleLight = (feederId) => {
     setLightingFeeders((prev) =>
@@ -185,27 +188,27 @@ export const EnergyPage = () => {
           <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm space-y-4">
             <div className="flex items-center justify-between border-b border-slate-100 pb-3">
               <div>
-                <span className="font-mono text-xs font-bold text-yellow-700">{selectedFeeder.id} DALI CONTROLLER</span>
-                <h3 className="text-base font-bold text-slate-900">{selectedFeeder.name}</h3>
+                <span className="font-mono text-xs font-bold text-yellow-700">{activeFeeder.id} DALI CONTROLLER</span>
+                <h3 className="text-base font-bold text-slate-900">{activeFeeder.name}</h3>
               </div>
               <div className="flex items-center gap-2">
                 <button
-                  onClick={() => handleToggleAuto(selectedFeeder.id)}
+                  onClick={() => handleToggleAuto(activeFeeder.id)}
                   className={`px-3 py-1 text-xs font-semibold rounded-lg border transition ${
-                    selectedFeeder.mode === "auto"
+                    activeFeeder.mode === "auto"
                       ? "bg-purple-100 text-purple-800 border-purple-200"
                       : "bg-slate-100 text-slate-700 border-slate-200"
                   }`}
                 >
-                  Mode: {selectedFeeder.mode.toUpperCase()}
+                  Mode: {(activeFeeder.mode || "auto").toUpperCase()}
                 </button>
                 <button
-                  onClick={() => handleToggleLight(selectedFeeder.id)}
+                  onClick={() => handleToggleLight(activeFeeder.id)}
                   className={`px-3.5 py-1 text-xs font-semibold rounded-lg text-white shadow-xs transition ${
-                    selectedFeeder.state === "ON" ? "bg-rose-600 hover:bg-rose-700" : "bg-amber-600 hover:bg-amber-700"
+                    activeFeeder.state === "ON" ? "bg-rose-600 hover:bg-rose-700" : "bg-amber-600 hover:bg-amber-700"
                   }`}
                 >
-                  {selectedFeeder.state === "ON" ? "Turn OFF" : "Turn ON"}
+                  {activeFeeder.state === "ON" ? "Turn OFF" : "Turn ON"}
                 </button>
               </div>
             </div>
@@ -215,28 +218,28 @@ export const EnergyPage = () => {
               <div className="p-3 rounded-xl bg-slate-50 border border-slate-100">
                 <span className="text-[10px] text-slate-400 uppercase font-semibold">Active Fixtures</span>
                 <div className="font-bold text-slate-900 text-base font-mono mt-1">
-                  {selectedFeeder.activeLamps} / {selectedFeeder.totalLamps}
+                  {activeFeeder.activeLamps} / {activeFeeder.totalLamps}
                 </div>
                 <div className="text-[10px] text-slate-500">LED 70W Fixtures</div>
               </div>
               <div className="p-3 rounded-xl bg-slate-50 border border-slate-100">
                 <span className="text-[10px] text-slate-400 uppercase font-semibold">Daylight Lux</span>
                 <div className="font-bold text-slate-900 text-base font-mono mt-1">
-                  {selectedFeeder.ambientLux} Lux
+                  {activeFeeder.ambientLux} Lux
                 </div>
                 <div className="text-[10px] text-slate-500">Daytime Threshold</div>
               </div>
               <div className="p-3 rounded-xl bg-slate-50 border border-slate-100">
                 <span className="text-[10px] text-slate-400 uppercase font-semibold">Grid Voltage</span>
                 <div className="font-bold text-slate-900 text-base font-mono mt-1">
-                  {selectedFeeder.voltageV} V
+                  {activeFeeder.voltageV} V
                 </div>
-                <div className="text-[10px] text-emerald-600 font-semibold">PF {selectedFeeder.powerFactor}</div>
+                <div className="text-[10px] text-emerald-600 font-semibold">PF {activeFeeder.powerFactor}</div>
               </div>
               <div className="p-3 rounded-xl bg-slate-50 border border-slate-100">
                 <span className="text-[10px] text-slate-400 uppercase font-semibold">Energy Today</span>
                 <div className="font-bold text-slate-900 text-base font-mono mt-1">
-                  {selectedFeeder.energyTodayKwh} kWh
+                  {activeFeeder.energyTodayKwh} kWh
                 </div>
                 <div className="text-[10px] text-slate-500">Cumulative Metrology</div>
               </div>
@@ -246,14 +249,14 @@ export const EnergyPage = () => {
             <div className="space-y-2 pt-2">
               <div className="flex items-center justify-between text-xs">
                 <span className="font-semibold text-slate-700">Dimming Level (0-100%)</span>
-                <span className="font-mono font-bold text-amber-700">{selectedFeeder.brightnessPct}%</span>
+                <span className="font-mono font-bold text-amber-700">{activeFeeder.brightnessPct || 0}%</span>
               </div>
               <input
                 type="range"
                 min="0"
                 max="100"
-                value={selectedFeeder.brightnessPct}
-                onChange={(e) => handleAdjustBrightness(selectedFeeder.id, Number(e.target.value))}
+                value={activeFeeder.brightnessPct || 0}
+                onChange={(e) => handleAdjustBrightness(activeFeeder.id, Number(e.target.value))}
                 className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-amber-500"
               />
               <div className="flex items-center justify-between text-[10px] text-slate-400">
@@ -303,3 +306,4 @@ export const EnergyPage = () => {
     </div>
   );
 };
+

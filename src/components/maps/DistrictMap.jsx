@@ -68,22 +68,24 @@ export const DistrictMap = ({
   const [filterCategory, setFilterCategory] = useState(initialCategory);
   const [showZoneBoundaries, setShowZoneBoundaries] = useState(true);
 
+  const safeDevices = devices || [];
+
   // Filter markers based on selected category
   const filteredDevices = useMemo(() => {
-    if (filterCategory === "all") return devices;
-    return devices.filter((d) => d.category === filterCategory);
-  }, [devices, filterCategory]);
+    if (filterCategory === "all") return safeDevices;
+    return safeDevices.filter((d) => d.category === filterCategory);
+  }, [safeDevices, filterCategory]);
 
   const categories = [
-    { id: "all", label: "All Assets", count: devices.length },
-    { id: "irrigation", label: "Irrigation", count: devices.filter((d) => d.category === "irrigation").length },
-    { id: "waste", label: "Waste", count: devices.filter((d) => d.category === "waste").length },
-    { id: "traffic", label: "Traffic", count: devices.filter((d) => d.category === "traffic").length },
-    { id: "water", label: "Water", count: devices.filter((d) => d.category === "water").length },
-    { id: "environment", label: "Environment", count: devices.filter((d) => d.category === "environment").length },
-    { id: "flood", label: "Disaster", count: devices.filter((d) => d.category === "flood").length },
-    { id: "lighting", label: "Lighting", count: devices.filter((d) => d.category === "lighting").length },
-    { id: "infrastructure", label: "Infra", count: devices.filter((d) => d.category === "infrastructure").length }
+    { id: "all", label: "All Assets", count: safeDevices.length },
+    { id: "irrigation", label: "Irrigation", count: safeDevices.filter((d) => d.category === "irrigation").length },
+    { id: "waste", label: "Waste", count: safeDevices.filter((d) => d.category === "waste").length },
+    { id: "traffic", label: "Traffic", count: safeDevices.filter((d) => d.category === "traffic").length },
+    { id: "water", label: "Water", count: safeDevices.filter((d) => d.category === "water").length },
+    { id: "environment", label: "Environment", count: safeDevices.filter((d) => d.category === "environment").length },
+    { id: "flood", label: "Disaster", count: safeDevices.filter((d) => d.category === "flood").length },
+    { id: "lighting", label: "Lighting", count: safeDevices.filter((d) => d.category === "lighting").length },
+    { id: "infrastructure", label: "Infra", count: safeDevices.filter((d) => d.category === "infrastructure").length }
   ];
 
   return (
@@ -249,3 +251,4 @@ export const DistrictMap = ({
     </div>
   );
 };
+

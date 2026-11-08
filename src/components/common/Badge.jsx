@@ -27,3 +27,4 @@ export const Badge = ({ children, variant = "info", size = "sm" }) => {
     </span>
   );
 };
+

@@ -42,7 +42,7 @@ export const NAV_ITEMS = [
 
 export const Sidebar = ({ isCollapsed, onToggleCollapse }) => {
   const { incidents, devices } = useApp();
-  const criticalCount = incidents.filter((i) => i.severity === "critical" && i.status !== "resolved").length;
+  const criticalCount = (incidents || []).filter((i) => i.severity === "critical" && i.status !== "resolved").length;
 
   return (
     <aside
@@ -153,3 +153,4 @@ export const Sidebar = ({ isCollapsed, onToggleCollapse }) => {
     </aside>
   );
 };
+

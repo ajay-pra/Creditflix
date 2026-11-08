@@ -170,3 +170,4 @@ export const IRRIGATION_HISTORICAL_TRENDS = [
   { time: "18:00", avgMoisture: 38.0, waterUsageKL: 52, temp: 28.0 },
   { time: "21:00", avgMoisture: 39.8, waterUsageKL: 15, temp: 24.6 },
 ];
+

@@ -241,3 +241,4 @@ export const PREDICTIVE_MAINTENANCE_LIST = [
     recommendation: "Field recalibration with portable Doppler clamp-on meter."
   }
 ];
+

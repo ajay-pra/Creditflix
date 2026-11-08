@@ -114,3 +114,4 @@ export const HOURLY_RIVER_LEVELS = [
   { hour: "18:00", barrageMeters: 4.85, stormDrainMeters: 2.30, rainfallMm: 0 },
   { hour: "21:00", barrageMeters: 4.80, stormDrainMeters: 2.05, rainfallMm: 0 },
 ];
+

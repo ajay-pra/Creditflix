@@ -77,3 +77,4 @@ export const calculateOptimizedRoute = (vehicle, bins, maxStops = 8) => {
     carbonOffsetKg: +(totalDistKm * 0.74).toFixed(1)
   };
 };
+

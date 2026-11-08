@@ -28,7 +28,12 @@ export const AppProvider = ({ children }) => {
   const loadState = (key, fallback) => {
     try {
       const saved = localStorage.getItem(`vasudha_${key}`);
-      return saved ? JSON.parse(saved) : fallback;
+      if (!saved || saved === "undefined" || saved === "null") return fallback;
+      const parsed = JSON.parse(saved);
+      if (Array.isArray(fallback) && (!Array.isArray(parsed) || parsed.length === 0)) {
+        return fallback;
+      }
+      return parsed || fallback;
     } catch {
       return fallback;
     }
@@ -109,43 +114,57 @@ export const AppProvider = ({ children }) => {
     aiRecommendations
   ]);
 
+  // State ref to keep latest values accessible in simulation loop without stale closures
+  const stateRef = useRef({
+    devices,
+    irrigationZones,
+    wasteBins,
+    vehicles,
+    intersections,
+    waterPoints,
+    envStations,
+    floodStations,
+    lightingFeeders
+  });
+
+  useEffect(() => {
+    stateRef.current = {
+      devices,
+      irrigationZones,
+      wasteBins,
+      vehicles,
+      intersections,
+      waterPoints,
+      envStations,
+      floodStations,
+      lightingFeeders
+    };
+  }, [
+    devices,
+    irrigationZones,
+    wasteBins,
+    vehicles,
+    intersections,
+    waterPoints,
+    envStations,
+    floodStations,
+    lightingFeeders
+  ]);
+
   // 3. Initialize Central Simulation Loop
   useEffect(() => {
     simEngineRef.current = new SimulationEngine((tickCount) => {
-      // Advance telemetry state
-      setIrrigationZones((prevIrr) => {
-        setWasteBins((prevBins) => {
-          setVehicles((prevVeh) => {
-            setIntersections((prevInt) => {
-              setWaterPoints((prevWtr) => {
-                setEnvStations((prevEnv) => {
-                  setDevices((prevDev) => {
-                    const next = simulateNextState({
-                      devices: prevDev,
-                      irrigationZones: prevIrr,
-                      wasteBins: prevBins,
-                      vehicles: prevVeh,
-                      intersections: prevInt,
-                      waterPoints: prevWtr,
-                      envStations: prevEnv,
-                      floodStations,
-                      lightingFeeders
-                    });
-                    // Apply device updates
-                    setDevices(next.devices);
-                    return next.envStations;
-                  });
-                  return prevWtr;
-                });
-                return prevInt;
-              });
-              return prevVeh;
-            });
-            return prevBins;
-          });
-          return prevIrr;
-        });
-      });
+      // Advance telemetry state cleanly
+      const next = simulateNextState(stateRef.current);
+      if (next) {
+        if (Array.isArray(next.irrigationZones)) setIrrigationZones(next.irrigationZones);
+        if (Array.isArray(next.wasteBins)) setWasteBins(next.wasteBins);
+        if (Array.isArray(next.vehicles)) setVehicles(next.vehicles);
+        if (Array.isArray(next.intersections)) setIntersections(next.intersections);
+        if (Array.isArray(next.waterPoints)) setWaterPoints(next.waterPoints);
+        if (Array.isArray(next.envStations)) setEnvStations(next.envStations);
+        if (Array.isArray(next.devices)) setDevices(next.devices);
+      }
     });
 
     simEngineRef.current.start(3500);
@@ -420,3 +439,4 @@ export const useApp = () => {
   }
   return context;
 };
+

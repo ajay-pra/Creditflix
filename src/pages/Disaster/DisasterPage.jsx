@@ -27,14 +27,17 @@ export const DisasterPage = () => {
     addToast
   } = useApp();
 
-  const [selectedStation, setSelectedStation] = useState(floodStations[2]); // Nallah-3 (high risk / storm surge)
+  const safeFlood = floodStations || [];
+  const [selectedStation, setSelectedStation] = useState(() => (safeFlood[2] || safeFlood[0] || {}));
   const [actuatorModalData, setActuatorModalData] = useState(null);
 
+  const activeStation = safeFlood.find((s) => s.id === selectedStation?.id) || selectedStation || safeFlood[0] || {};
+
   // KPIs
-  const totalStations = floodStations.length;
-  const highRiskCount = floodStations.filter((s) => s.floodRiskLevel === "HIGH" || s.floodRiskLevel === "CRITICAL").length;
-  const barrageStation = floodStations[0];
-  const activePumps = floodStations.reduce((acc, s) => acc + s.drainagePumpsRunning, 0);
+  const totalStations = safeFlood.length || 1;
+  const highRiskCount = safeFlood.filter((s) => s.floodRiskLevel === "HIGH" || s.floodRiskLevel === "CRITICAL").length;
+  const barrageStation = safeFlood[0] || {};
+  const activePumps = safeFlood.reduce((acc, s) => acc + (s.drainagePumpsRunning || 0), 0);
 
   const handleTogglePumps = (station) => {
     const isPumping = station.drainagePumpsRunning > 0;
@@ -75,13 +78,13 @@ export const DisasterPage = () => {
         actions={
           <div className="flex items-center gap-2">
             <button
-              onClick={() => handleTogglePumps(selectedStation)}
+              onClick={() => handleTogglePumps(activeStation)}
               className={`flex items-center gap-1.5 px-3.5 py-1.5 text-xs font-semibold rounded-xl text-white shadow-sm transition ${
-                selectedStation.drainagePumpsRunning > 0 ? "bg-rose-600 hover:bg-rose-700" : "bg-blue-600 hover:bg-blue-700"
+                activeStation.drainagePumpsRunning > 0 ? "bg-rose-600 hover:bg-rose-700" : "bg-blue-600 hover:bg-blue-700"
               }`}
             >
               <Power className="h-3.5 w-3.5" />
-              <span>{selectedStation.drainagePumpsRunning > 0 ? "Halt Storm Dewatering" : "Start Storm Dewatering"}</span>
+              <span>{activeStation.drainagePumpsRunning > 0 ? "Halt Storm Dewatering" : "Start Storm Dewatering"}</span>
             </button>
           </div>
         }
@@ -194,11 +197,11 @@ export const DisasterPage = () => {
           <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm space-y-4">
             <div className="flex items-center justify-between border-b border-slate-100 pb-3">
               <div>
-                <span className="font-mono text-xs font-bold text-rose-600">{selectedStation.id} HYDROLOGICAL POST</span>
-                <h3 className="text-base font-bold text-slate-900">{selectedStation.name}</h3>
+                <span className="font-mono text-xs font-bold text-rose-600">{activeStation.id} HYDROLOGICAL POST</span>
+                <h3 className="text-base font-bold text-slate-900">{activeStation.name}</h3>
               </div>
-              <Badge variant={selectedStation.floodRiskLevel === "HIGH" ? "critical" : "healthy"}>
-                {selectedStation.floodRiskLevel} RISK
+              <Badge variant={activeStation.floodRiskLevel === "HIGH" ? "critical" : "healthy"}>
+                {activeStation.floodRiskLevel || "LOW"} RISK
               </Badge>
             </div>
 
@@ -207,25 +210,25 @@ export const DisasterPage = () => {
               <div className="flex items-center justify-between text-xs">
                 <span className="font-semibold text-slate-700">Water Depth vs Danger Threshold</span>
                 <span className="font-mono font-bold text-slate-900">
-                  {selectedStation.waterLevelMeters} m / Danger: {selectedStation.dangerLevelMeters} m
+                  {activeStation.waterLevelMeters} m / Danger: {activeStation.dangerLevelMeters} m
                 </span>
               </div>
               <div className="w-full bg-slate-200 h-3 rounded-full overflow-hidden flex">
                 <div
                   className={`h-full ${
-                    selectedStation.waterLevelMeters >= selectedStation.warningLevelMeters
+                    activeStation.waterLevelMeters >= activeStation.warningLevelMeters
                       ? "bg-rose-500"
                       : "bg-blue-500"
                   }`}
                   style={{
-                    width: `${Math.min(100, (selectedStation.waterLevelMeters / selectedStation.dangerLevelMeters) * 100)}%`
+                    width: `${Math.min(100, ((activeStation.waterLevelMeters || 1) / (activeStation.dangerLevelMeters || 7)) * 100)}%`
                   }}
                 />
               </div>
               <div className="flex items-center justify-between text-[10px] text-slate-400 font-mono">
-                <span>Bed: {selectedStation.riverBedMeters} m</span>
-                <span className="text-amber-600 font-bold">Warning: {selectedStation.warningLevelMeters} m</span>
-                <span className="text-rose-600 font-bold">Danger: {selectedStation.dangerLevelMeters} m</span>
+                <span>Bed: {activeStation.riverBedMeters} m</span>
+                <span className="text-amber-600 font-bold">Warning: {activeStation.warningLevelMeters} m</span>
+                <span className="text-rose-600 font-bold">Danger: {activeStation.dangerLevelMeters} m</span>
               </div>
             </div>
 
@@ -234,16 +237,16 @@ export const DisasterPage = () => {
               <div>
                 <div className="font-bold text-slate-900">Barrage Sluice Gates</div>
                 <div className="text-slate-500 text-[11px] mt-0.5">
-                  Currently {selectedStation.sluiceGatesOpen} of {selectedStation.totalSluiceGates} gates deployed
+                  Currently {activeStation.sluiceGatesOpen} of {activeStation.totalSluiceGates} gates deployed
                 </div>
               </div>
               <div className="flex items-center gap-1.5">
-                {[...Array(selectedStation.totalSluiceGates + 1).keys()].slice(0, 6).map((num) => (
+                {[...Array((activeStation.totalSluiceGates || 6) + 1).keys()].slice(0, 6).map((num) => (
                   <button
                     key={num}
-                    onClick={() => handleAdjustSluice(selectedStation.id, num)}
+                    onClick={() => handleAdjustSluice(activeStation.id, num)}
                     className={`h-7 w-7 rounded-lg text-xs font-bold transition ${
-                      selectedStation.sluiceGatesOpen === num
+                      activeStation.sluiceGatesOpen === num
                         ? "bg-blue-600 text-white shadow-xs"
                         : "bg-white border border-slate-200 text-slate-700 hover:bg-slate-100"
                     }`}
@@ -302,3 +305,4 @@ export const DisasterPage = () => {
     </div>
   );
 };
+
