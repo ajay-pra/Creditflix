@@ -98,7 +98,7 @@ export const OverviewPage = () => {
       {/* Page Header */}
       <Breadcrumb
         title="District Executive Command Centre"
-        subtitle="Unified Command & Control • Vasudha Smart District • Operational Dashboard"
+        subtitle="Unified Command & Control • Creditfix District Administration • Operational Dashboard"
         actions={
           <div className="flex items-center gap-2">
             <span className="flex items-center gap-1.5 text-xs text-slate-500 bg-white border border-slate-200 px-3 py-1.5 rounded-xl shadow-sm">

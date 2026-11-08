@@ -59,10 +59,10 @@ export const Sidebar = ({ isCollapsed, onToggleCollapse }) => {
             </div>
             <div className="min-w-0">
               <h1 className="text-sm font-extrabold text-white tracking-tight truncate">
-                VASUDHA SMART
+                CREDITFIX AI
               </h1>
               <p className="text-[10px] text-blue-400 font-semibold uppercase tracking-wider truncate">
-                Unified Command Centre
+                Collectorate Command Centre
               </p>
             </div>
           </div>

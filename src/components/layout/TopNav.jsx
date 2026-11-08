@@ -11,10 +11,14 @@ import {
   ChevronDown,
   Clock,
   ShieldAlert,
-  MapPin
+  MapPin,
+  Presentation,
+  MessageSquare
 } from "lucide-react";
 import { useApp, DEMO_ROLES } from "../../context/AppContext";
 import { useNavigate } from "react-router-dom";
+import { DemoWalkthroughModal } from "../modals/DemoWalkthroughModal";
+import { CitizenWhatsAppBotModal } from "../modals/CitizenWhatsAppBotModal";
 
 export const TopNav = ({ isSidebarCollapsed }) => {
   const {
@@ -37,6 +41,8 @@ export const TopNav = ({ isSidebarCollapsed }) => {
   const [dateString, setDateString] = useState("");
   const [isRoleDropdownOpen, setIsRoleDropdownOpen] = useState(false);
   const [isSearchFocused, setIsSearchFocused] = useState(false);
+  const [isDemoWalkthroughOpen, setIsDemoWalkthroughOpen] = useState(false);
+  const [isWhatsAppBotOpen, setIsWhatsAppBotOpen] = useState(false);
 
   // Live Clock updater
   useEffect(() => {
@@ -167,11 +173,31 @@ export const TopNav = ({ isSidebarCollapsed }) => {
             </button>
           </div>
 
+          {/* Demo Walkthrough Button */}
+          <button
+            onClick={() => setIsDemoWalkthroughOpen(true)}
+            className="flex items-center gap-1.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white px-3 py-1.5 text-xs font-semibold shadow-sm shadow-blue-600/20 transition active:scale-95"
+            title="Creditfix Assessment Walkthrough & Scenarios"
+          >
+            <Presentation className="h-3.5 w-3.5" />
+            <span className="hidden md:inline">Assessment Demo</span>
+          </button>
+
+          {/* WhatsApp Citizen Bot Simulator */}
+          <button
+            onClick={() => setIsWhatsAppBotOpen(true)}
+            className="flex items-center gap-1.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white px-3 py-1.5 text-xs font-semibold shadow-sm shadow-emerald-600/20 transition active:scale-95"
+            title="Simulate WhatsApp Citizen Grievance Intake (Hindi/English)"
+          >
+            <MessageSquare className="h-3.5 w-3.5" />
+            <span className="hidden lg:inline">Citizen WhatsApp</span>
+          </button>
+
           {/* AI Assistant Button */}
           <button
             onClick={() => setIsAIAssistantOpen(true)}
             className="flex items-center gap-1.5 rounded-xl bg-purple-600 hover:bg-purple-700 text-white px-3 py-1.5 text-xs font-semibold shadow-sm shadow-purple-600/20 transition active:scale-95"
-            title="Open Vasudha AI Copilot"
+            title="Open Creditfix Collectorate AI Copilot"
           >
             <Sparkles className="h-3.5 w-3.5" />
             <span className="hidden sm:inline">AI Copilot</span>
@@ -243,6 +269,18 @@ export const TopNav = ({ isSidebarCollapsed }) => {
           </div>
         </div>
       </div>
+
+      {/* Creditfix Assessment Demo Walkthrough Modal */}
+      <DemoWalkthroughModal
+        isOpen={isDemoWalkthroughOpen}
+        onClose={() => setIsDemoWalkthroughOpen(false)}
+      />
+
+      {/* Citizen WhatsApp AI Grievance Intake Simulator */}
+      <CitizenWhatsAppBotModal
+        isOpen={isWhatsAppBotOpen}
+        onClose={() => setIsWhatsAppBotOpen(false)}
+      />
     </header>
   );
 };

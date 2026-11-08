@@ -1,5 +1,5 @@
 // Smart Irrigation & Agriculture Dataset
-// 6 Agricultural & Horticulture Zones in Vasudha Smart District
+// 6 Agricultural & Horticulture Zones in Creditfix District Administration
 
 export const INITIAL_IRRIGATION_ZONES = [
   {

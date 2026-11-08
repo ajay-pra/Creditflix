@@ -56,7 +56,7 @@ export const ReportsPage = () => {
       CreatedTime: i.createdAt,
       DueDate: i.dueDate
     }));
-    exportToCSV(`Vasudha_District_Incidents_${new Date().toISOString().slice(0, 10)}.csv`, rows);
+    exportToCSV(`Creditfix_District_Incidents_${new Date().toISOString().slice(0, 10)}.csv`, rows);
     addToast("CSV Export Generated", "Downloaded complete District Incidents dataset.", "success");
   };
 
@@ -73,7 +73,7 @@ export const ReportsPage = () => {
       SignalDbm: d.signalStrength,
       Firmware: d.firmwareVersion
     }));
-    exportToCSV(`Vasudha_IoT_Fleet_Registry_${new Date().toISOString().slice(0, 10)}.csv`, rows);
+    exportToCSV(`Creditfix_IoT_Fleet_Registry_${new Date().toISOString().slice(0, 10)}.csv`, rows);
     addToast("CSV Export Generated", "Downloaded complete IoT Fleet Registry dataset.", "success");
   };
 
@@ -140,7 +140,7 @@ export const ReportsPage = () => {
 
       {/* Printable Report Header */}
       <div className="hidden print:block p-4 border-b border-slate-300">
-        <h1 className="text-2xl font-bold text-slate-900">VASUDHA SMART DISTRICT COMMAND CENTRE</h1>
+        <h1 className="text-2xl font-bold text-slate-900">CREDITFIX DISTRICT ADMINISTRATION COMMAND CENTRE</h1>
         <p className="text-xs text-slate-600">Executive Performance Audit & IoT Operations Review Dossier</p>
         <div className="text-xs text-slate-500 mt-1">Generated for District Magistrate & Collector Review</div>
       </div>

@@ -18,7 +18,7 @@ export const CityMapPage = () => {
     <div className="space-y-5">
       <Breadcrumb
         title="GIS Geospatial District Command Map"
-        subtitle="Full-District GIS Visualisation • 100 IoT Telemetry Endpoints • Vasudha Smart District"
+        subtitle="Full-District GIS Visualisation • 100 IoT Telemetry Endpoints • Creditfix District Administration"
         actions={
           <div className="flex items-center gap-2">
             <span className="text-xs text-slate-500 font-semibold bg-white border border-slate-200 px-3 py-1.5 rounded-xl shadow-sm">

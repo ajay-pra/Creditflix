@@ -14,7 +14,7 @@ export const Breadcrumb = ({ title, subtitle, actions }) => {
         <div className="flex items-center gap-1.5 text-xs text-slate-400 font-medium mb-1">
           <Link to="/" className="hover:text-slate-700 flex items-center gap-1 transition">
             <Home className="h-3.5 w-3.5" />
-            <span>Vasudha District</span>
+            <span>Collectorate HQ</span>
           </Link>
           <ChevronRight className="h-3 w-3" />
           <span className="text-slate-800 font-semibold">{currentItem ? currentItem.label : title}</span>

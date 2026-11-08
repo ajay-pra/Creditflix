@@ -1,5 +1,5 @@
 // Public Infrastructure Monitoring Dataset
-// 20 Strategic Infrastructure Assets in Vasudha Smart District
+// 20 Strategic Infrastructure Assets in Creditfix District Administration
 
 export const ASSET_TYPES = [
   "Bridges & Flyovers",
@@ -13,7 +13,7 @@ export const ASSET_TYPES = [
 export const INITIAL_INFRA_ASSETS = [
   {
     id: "INF-AST-01",
-    name: "Vasudha Cable-Stayed Barrage Bridge Pier 3",
+    name: "District Cable-Stayed Barrage Bridge Pier 3",
     type: "Bridges & Flyovers",
     zone: "zone-4",
     coordinates: [26.8612, 80.9238],

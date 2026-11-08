@@ -62,7 +62,7 @@ export const MULTI_DOMAIN_FORECASTS = {
       { horizon: "Next 24h", actual: null, predicted: 7.0, supplyCapacity: 8.5 }
     ],
     confidence: 96,
-    insight: "Evening municipal water demand surge expected between 18:00 - 20:30. Overhead reservoir OHT-03 requires 45 mins pre-filling cycle from Vasudha Lake Reservoir."
+    insight: "Evening municipal water demand surge expected between 18:00 - 20:30. Overhead reservoir OHT-03 requires 45 mins pre-filling cycle from District Lake Reservoir."
   },
   environment: {
     title: "Air Quality Index (AQI) 24-Hour Forecast",

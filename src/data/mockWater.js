@@ -1,10 +1,10 @@
 // Smart Water & Distribution Network Dataset
-// 10 Monitoring Points & Pumping Stations in Vasudha Smart District
+// 10 Monitoring Points & Pumping Stations in Creditfix District Administration
 
 export const INITIAL_WATER_POINTS = [
   {
     id: "WTR-001",
-    name: "Vasudha Lake Primary Reservoir",
+    name: "District Lake Primary Reservoir",
     type: "Raw Water Reservoir",
     zone: "zone-4",
     coordinates: [26.8620, 80.9230],

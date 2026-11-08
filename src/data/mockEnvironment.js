@@ -1,5 +1,5 @@
 // Environment & Air Quality Dataset
-// 8 Continuous Ambient Air Quality Monitoring Stations (CAAQMS) in Vasudha Smart District
+// 8 Continuous Ambient Air Quality Monitoring Stations (CAAQMS) in Creditfix District Administration
 
 export const INITIAL_ENV_STATIONS = [
   {

@@ -1,5 +1,5 @@
 // Smart Waste Management Dataset
-// 50 Smart Bins & 10 Municipal Fleet Vehicles in Vasudha Smart District
+// 50 Smart Bins & 10 Municipal Fleet Vehicles in Creditfix District Administration
 
 export const BIN_TYPES = [
   { id: "biodegradable", name: "Organic / Wet Waste", color: "#16a34a" },
@@ -173,7 +173,7 @@ export const INITIAL_VEHICLES = [
     speedKmph: 28,
     assignedBinsCount: 4,
     completedBinsCount: 3,
-    nextStop: "Vasudha Solid Waste Transfer Station",
+    nextStop: "Central District Solid Waste Transfer Station",
     fuelBatteryPct: 64
   },
   {

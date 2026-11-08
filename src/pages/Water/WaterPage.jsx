@@ -95,7 +95,7 @@ export const WaterPage = () => {
       {/* KPI Cards */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
         <StatCard
-          title="Vasudha Lake Reservoir"
+          title="District Lake Reservoir"
           value={`${primaryReservoir?.levelPct}%`}
           subtext="1,225 ML Storage"
           icon={Waves}

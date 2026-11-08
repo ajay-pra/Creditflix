@@ -1,5 +1,5 @@
 // Energy & Smart Street Lighting Dataset
-// 30 Smart Feeder Panels managing 1,450 LED fixtures in Vasudha Smart District
+// 30 Smart Feeder Panels managing 1,450 LED fixtures in Creditfix District Administration
 
 export const INITIAL_LIGHTING_SUMMARY = {
   totalFixtures: 1450,

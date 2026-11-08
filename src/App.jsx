@@ -72,7 +72,7 @@ const MainLayout = () => {
       {/* Floating System Notifications */}
       <ToastContainer />
 
-      {/* Vasudha AI Copilot Dialog */}
+      {/* Creditfix Collectorate AI Copilot Dialog */}
       <AIAssistantModal
         isOpen={isAIAssistantOpen}
         onClose={() => setIsAIAssistantOpen(false)}

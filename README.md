@@ -1,37 +1,62 @@
-# Vasudha Smart District | Unified Intelligence & Command Centre
+# Creditfix District Administration | AI Command Centre
+## Applied AI Engineer Assessment Task (LLM, Automation and Full-Stack)
 
-A government-grade, unified command-and-control platform for monitoring, analyzing, and managing district infrastructure, IoT sensor networks, civic utilities, and citizen incident workflows.
+A government-grade, unified command-and-control platform for monitoring, analyzing, and managing district administration workflows, citizen grievance pipelines, file movements, IoT sensor networks, and civic infrastructure.
 
-Built as an executive proof of concept for the **Creditfix Group Applied AI Engineer Assessment Task (Take-Home Project & Live Presentation)**.
+Built as the practical working proof for the **Creditfix Group – Applied AI Engineer Assessment Task (Take-Home Project & Live Technical Presentation)**.
+
+---
+
+## 📑 Assessment Deliverables Matrix
+
+| Deliverable | File / Location | Description |
+| :--- | :--- | :--- |
+| **Comprehensive Proposal Document** | [`CREDITFIX_DISTRICT_ADMINISTRATION_AI_PROPOSAL.md`](./CREDITFIX_DISTRICT_ADMINISTRATION_AI_PROPOSAL.md) | 6-part proposal answering Parts A to F of the brief (Discovery, Solution Design, 12-Month Roadmap, Security & MeghRaj Compliance, Executive Pitch to DM, and Objection Handling). |
+| **Executive Presentation Slide Deck** | [`CREDITFIX_PRESENTATION_SLIDES_DECK.md`](./CREDITFIX_PRESENTATION_SLIDES_DECK.md) | 20-slide presentation deck with word-for-word speaker notes, slide layouts, 5-minute live demo script, and 30-minute Q&A defense. |
+| **Interactive Working Proof Prototype** | Running on `http://localhost:3000` | Full-stack interactive web application with WhatsApp AI citizen intake simulator, file tracking, 15 modules, and live telemetry simulation. |
 
 ---
 
 ## 🏛️ Project Overview
 
-**Vasudha Smart District** simulates an end-to-end digital twin of a forward-looking Indian district administration (District Magistrate / Collectorate / Municipal Corporation headquarters).
+This platform simulates an end-to-end digital twin of a forward-looking Indian district administration (Office of the District Magistrate / Collectorate & Municipal Headquarters).
 
-The platform models 6 administrative zones across **8 core smart city verticals**:
-1. **Smart Agriculture & Irrigation**: Multi-depth soil moisture probes (10cm/30cm), motorized pumps, solenoid valves, evapotranspiration analytics.
-2. **Solid Waste Management & Fleet Tracking**: 50 ultrasonic sensor-enabled smart bins, 10 municipal compactor trucks with live GPS, and simulated TSP route optimization.
-3. **Adaptive Traffic & Transit Management**: 8 arterial intersections with 77GHz FMCW radar sensors, vehicle flow telemetry, congestion heatmaps, and SCATS-style adaptive signal controller simulation.
-4. **Potable Water Supply & SCADA**: Primary reservoirs, water treatment plants (WTPs), elevated storage reservoirs (OHTs), acoustic leak detection (Section 12 anomaly), and motorized pressure regulating valves.
-5. **Continuous Ambient Air Quality (CAAQMS)**: 8 environmental observatories measuring AQI, PM2.5, PM10, gaseous pollutants, ambient noise, and anti-smog water cannon logistics.
-6. **Disaster Hydrology & Flood Early Warning**: Gomati River gauging pylons, storm drain basins, sluice gate actuators, and high-capacity submersible dewatering pumps.
+It answers the core assessment brief:
+> *"A District Administration office (the office of the District Magistrate / Collectorate) in a large Indian district handles a high volume of citizen work. This includes grievance applications, certificate and licence requests, file movement between departments, field reports, review meetings and follow-ups with officers... How would you take this office from zero to a fully working, AI-enabled workflow, and how would you convince them to adopt it?"*
+
+### 1. Collectorate Administrative Core (Part B Use Cases):
+1. **Multilingual WhatsApp Citizen AI Bot (Samadhan AI):**
+   - Click the **"Citizen WhatsApp"** button in the header.
+   - Type or select colloquial Hindi or English citizen grievances (e.g. *"सदर बाजार में नाला चोक और गंदा पानी"*, *"Drinking water pipeline burst in Sector 8"*).
+   - Real-time NLP parsing extracts language, category, department, assigned nodal officer, and SLA timer.
+   - Instantly creates a live ticket `#CFX-INC-XXX` in the central state and provides simulated WhatsApp/SMS confirmation!
+2. **Physical File & Document Tracking (e-Daftar):**
+   - Barcode/QR jacket tracking monitoring desk-to-desk custody and flagging files dwelling >48 hours without action.
+3. **DM's Review Meeting Copilot (Samiksha AI):**
+   - Click the **"AI Copilot"** button in the header and choose *"Prepare Monday Morning Review Meeting (Samiksha Baithak) agenda for the DM"*.
+   - Auto-compiles departmental SLA compliance, highlights lagging tehsils (Jal Nigam water leaks, Sadar Tehsil certificates), and formulates actionable agenda directives.
+
+### 2. Physical District & IoT Infrastructure (8 Verticals):
+1. **Smart Agriculture & Irrigation**: Multi-depth soil moisture probes (10cm/30cm), motorized solar pumps, solenoid valves, evapotranspiration analytics.
+2. **Solid Waste Logistics & Fleet Tracking**: 50 ultrasonic sensor-enabled smart bins, 10 municipal compactor trucks with live GPS, and in-browser Traveling Salesperson (TSP) route optimization.
+3. **Adaptive Traffic & Transit Management**: 8 arterial intersections with 77GHz FMCW radar sensors, vehicle flow telemetry, congestion heatmaps, and SCATS adaptive signal control.
+4. **Potable Water Supply & SCADA**: Primary reservoirs, water treatment plants (WTPs), elevated storage reservoirs (OHTs), acoustic leak detection (Section 12 rupture anomaly), and motorized pressure regulating valves.
+5. **Continuous Ambient Air Quality (CAAQMS)**: 8 environmental observatories measuring AQI, PM2.5, PM10, gaseous pollutants, ambient noise, and mobile anti-smog cannon logistics.
+6. **Disaster Hydrology & Flood Early Warning**: Gomati River hydro gauging pylons, storm drain basins, sluice gate actuators, and high-capacity submersible dewatering pumps.
 7. **Energy & Smart Street Lighting**: 1,450 LED luminaires managed across 30 feeder panels with DALI 0-10V dimmers, astronomical clock automation, and energy saving meters.
-8. **Public Infrastructure Structural Health Monitoring (SHM)**: Triaxial MEMS accelerometers, vibrating wire strain gauges, and crack displacement sensors on cable-stayed bridges, elevated metro viaducts, and government buildings.
+8. **Public Infrastructure Structural Health (SHM)**: Triaxial MEMS accelerometers, vibrating wire strain gauges, and crack displacement sensors on cable-stayed bridges, elevated viaducts, and government buildings.
 
 ---
 
-## 🧠 Core Philosophy
+## 🧠 Core System Philosophy
 
-$$\text{Monitor} \longrightarrow \text{Analyse} \longrightarrow \text{Predict} \longrightarrow \text{Decide} \longrightarrow \text{Act} \longrightarrow \text{Verify}$$
+$$\text{Citizen Intake} \longrightarrow \text{Automated NLP Triage} \longrightarrow \text{Desk Dwell Tracking} \longrightarrow \text{Human SCADA Action} \longrightarrow \text{Closed-Loop Verification}$$
 
-* **Monitor**: Centralized streaming telemetry from 100 IoT devices and 6 administrative zones.
-* **Analyse**: Real-time cross-vertical correlation (e.g. pressure drops combined with discharge spikes identify underground pipe bursts).
-* **Predict**: Multi-horizon AI forecasting across 1h, 3h, 6h, 12h, and 24h horizons.
-* **Decide**: Evidence-based SOP recommendations tailored for senior administrators.
-* **Act**: SCADA actuator control with mandatory human-in-the-loop safety interlocks (pumps, sluice gates, traffic signals, feeder relays).
-* **Verify**: Closed-loop audit logging and citizen resolution verification.
+* **Intake:** Vernacular voice notes and WhatsApp text in colloquial Hindi and English.
+* **Triage:** Fine-tuned Indic LLMs classify intent, category, and urgency with >95% accuracy.
+* **Tracking:** Deterministic audit logging and desk dwell timers ensure accountability.
+* **Human Action:** Mandatory SCADA confirmation modal—an AI recommendation **NEVER** automatically activates high-power municipal hardware without human authorization.
+* **Verification:** A ticket is only permanently closed after the citizen verifies satisfaction via WhatsApp.
 
 ---
 
@@ -44,7 +69,7 @@ $$\text{Monitor} \longrightarrow \text{Analyse} \longrightarrow \text{Predict} \
 ### Installation & Run
 
 ```bash
-# 1. Clone repository or navigate to project directory
+# 1. Navigate to project root
 cd e:/smartCity
 
 # 2. Install dependencies (React 18, Vite 5, Tailwind CSS, Leaflet, Recharts, Lucide React)
@@ -59,120 +84,26 @@ The application will launch locally at `http://localhost:3000` (or `http://local
 ### Production Build
 
 ```bash
+# Verify production compilation
 npm run build
-npm run preview
 ```
 
 ---
 
-## 🗺️ Application Architecture
+## 🧪 Live Demo Walkthrough (5-Minute Assessment Tour)
 
-```
-src/
-├── components/
-│   ├── layout/          # Sidebar (15 items), TopNav (Live clock, search, role switcher), Breadcrumb
-│   ├── common/          # StatCard, Badge, Modal, ToastContainer, SimulationControls
-│   ├── charts/          # TrendChart (Area/Line), ComparisonBarChart
-│   ├── maps/            # DistrictMap (Leaflet OpenStreetMap with custom SVG glowing DivIcons)
-│   └── modals/          # ActuatorConfirmModal, AIAssistantModal, DeviceDetailModal, IncidentDetailModal, CreateIncidentModal
-├── data/
-│   ├── mockLocations.js    # Vasudha District info & 6 geographic zones
-│   ├── mockDevices.js      # 100 IoT devices with realistic telemetry & connectivity
-│   ├── mockIrrigation.js   # 6 zones with soil depth readings, crop types, pumps
-│   ├── mockWaste.js        # 50 bins + 10 municipal collection trucks
-│   ├── mockTraffic.js      # 8 intersections with signal phases & congestion metrics
-│   ├── mockWater.js        # Reservoirs, WTPs, flow meters & pipeline leakage anomaly
-│   ├── mockEnvironment.js  # 8 CAAQMS ambient air observatories
-│   ├── mockDisaster.js     # 5 river & storm drain gauging stations
-│   ├── mockEnergy.js       # Streetlight feeders, dimming schedules, astronomical clock
-│   ├── mockInfrastructure.js # 20 bridges, flyovers, buildings with SHM sensors
-│   ├── mockAlerts.js       # 20 administrative incident dossiers with action history
-│   └── mockForecasts.js    # Multi-horizon forecast datasets & predictive maintenance
-├── services/
-│   ├── simulationService.js # Central simulation engine (tick loop, drift, pause/resume)
-│   ├── mockAIService.js     # Vasudha AI Copilot natural query parser
-│   ├── mockRouteService.js  # Greedy TSP waste collection route optimizer
-│   └── exportService.js     # CSV report generator & print handler
-├── context/
-│   └── AppContext.jsx       # Central state provider, LocalStorage sync & event dispatchers
-├── pages/                   # 15 Complete Navigation Views
-│   ├── Overview/            # Executive Command Centre Dashboard
-│   ├── CityMap/             # Full GIS Geospatial Map
-│   ├── Irrigation/          # Smart Irrigation & Precision Agriculture
-│   ├── Waste/               # Waste Logistics & AI Route Planning
-│   ├── Traffic/             # Intelligent Traffic & Adaptive Signals
-│   ├── Water/               # Potable Water Distribution & SCADA
-│   ├── Environment/         # Air Quality CAAQMS Observatory
-│   ├── Disaster/            # Flood Hydrology Early Warning
-│   ├── Energy/              # Smart Street Lighting Tele-Management
-│   ├── Infrastructure/      # Civil Infrastructure Structural Health
-│   ├── DeviceManagement/    # Central IoT Device Registry (100 nodes)
-│   ├── AIIntelligence/      # AI Forecasting & Anomaly Center
-│   ├── Incidents/           # Citizen Grievance & SLA Incident Tracker
-│   ├── Reports/             # Executive Reporting & CSV Export
-│   └── Settings/            # Demo Role Switcher, Thresholds & State Engine
-├── App.jsx                  # Main router & shell wrapper
-└── main.jsx                 # React root DOM mounting
-```
+To run through the exact assessment evaluation scenario during the live interview:
+
+1. Click **"Assessment Demo"** in the top navigation bar to open the guided walkthrough modal.
+2. Click **"Citizen WhatsApp"** in the top navigation bar to simulate citizen grievance filing in Hindi.
+3. Click **"AI Copilot"** to generate the DM's Monday *Samiksha Baithak* executive briefing.
+4. Open the **Smart Irrigation** module (`/irrigation`) and activate pump `PMP-04` to see the mandatory SCADA safety confirmation dialog.
+5. Open **Waste Management** (`/waste`) and click **"Optimize Collection Route"** to run the live Traveling Salesperson route solver.
+6. Open **Reports & Analytics** (`/reports`) to export CSV records or open the printable Collectorate briefing pack.
 
 ---
 
-## ⚡ Key Interactive Capabilities
-
-1. **Central Simulation Engine**:
-   * Use the Top Navigation widget to **Pause** or **Resume** live telemetry streaming.
-   * Adjust simulation speed (1x, 2x, 5x) to observe rapid sensor drift.
-   * Tap **Reset Demo State** to instantly restore all 100 devices and tickets to their initial baseline.
-2. **AI-Powered Route Optimisation**:
-   * Navigate to **Waste Management**, select a collection truck, and click **AI Route Optimisation**.
-   * The system evaluates bins with $\ge 75\%$ fill, computes an optimal TSP traversal, calculates distance and fuel saved, and draws the interactive route polyline on the GIS map.
-3. **Mandatory Actuator Safety Modal**:
-   * In Irrigation, Water, Disaster, or Traffic modules, triggering any physical actuator (pump, flood gate, traffic green extension) opens a **Mandatory Safety Pre-Check Dialog**.
-   * Verifies upstream water availability, electrical voltage, and operating thresholds before sending the command ACK.
-4. **Vasudha AI Copilot**:
-   * Click **AI Copilot** in the top bar to query the district's status in plain language.
-   * Try suggested prompts: *"Which zones have critical irrigation?"*, *"Which waste bins may overflow today?"*, or *"Which water monitoring stations show anomalies?"*.
-5. **Incident Lifecycle Management**:
-   * Move incidents between **New → Acknowledged → Assigned → In Progress → Resolved → Closed**.
-   * Reassign nodal officers and departments, add resolution audit notes, or log new citizen grievances.
-6. **Executive Export**:
-   * In **Reports & Analytics**, generate print-friendly review briefs or export full CSV datasets for both Incident Dossiers and IoT Fleets.
-
----
-
-## 🔌 Future Real-World Integration Readiness
-
-This proof of concept is architected cleanly to connect to real-world infrastructure:
-
-```
-┌───────────────────────────────────────┐
-│     FUTURE BACKEND INTEGRATION        │
-├───────────────────────────────────────┤
-│ 1. IoT Telemetry Service:             │
-│    Connect src/services/simulation.js │
-│    to an MQTT Broker (EMQX / HiveMQ)  │
-│    via MQTT.js / WebSocket.           │
-│                                       │
-│ 2. AI Inference Microservice:         │
-│    Replace src/services/mockAIService │
-│    with a FastAPI Python backend      │
-│    hosting Llama-3 / Mistral via vLLM.│
-│                                       │
-│ 3. Database & Time-Series:            │
-│    Connect AppContext to PostgreSQL   │
-│    with TimescaleDB for telemetry and │
-│    PostGIS for geospatial layers.     │
-│                                       │
-│ 4. SCADA RTU Protocol Gateway:        │
-│    Interface actuator commands to     │
-│    Modbus-TCP / DNP3 industrial RTUs. │
-└───────────────────────────────────────┘
-```
-
----
-
-## 📄 Assessment Task Documentation
-
-The full proposal responding to the candidate brief from Creditfix Group is included in:
-* **`DISTRICT_ADMINISTRATION_AI_PROPOSAL.md`**: Complete Part A to Part F proposal covering Stakeholder Discovery, Solution Architecture, Zero-to-100% Roadmap, Risks & Sovereign Compliance, Executive Pitch to the DM, and Objection Handling.
-
+## 🛡️ Architecture & Sovereign Compliance
+* **Sovereign Cloud Deployment:** Architecture engineered for deployment on **NIC Cloud (MeghRaj)** or MeitY-empaneled Indian data centers.
+* **Aadhaar / PII Redaction:** Automated regex pipeline strips citizen identification numbers before LLM ingestion.
+* **Deterministic Fallback:** Strict JSON schema enforcement and confidence gating (<82% routed to human triage clerk).

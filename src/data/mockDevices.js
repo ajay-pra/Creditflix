@@ -1,4 +1,4 @@
-// Central Device Registry - 100 IoT Devices across Vasudha Smart District
+// Central Device Registry - 100 IoT Devices across Creditfix District Administration
 // All devices have coherent IDs, coordinates within district zones, connectivity, and telemetry
 
 export const DEVICE_CATEGORIES = [
@@ -189,7 +189,7 @@ export const generateInitialDevices = () => {
 
   // 4. Smart Water Distribution & Quality (14 devices)
   const waterPoints = [
-    { name: 'Vasudha Lake Reservoir Intake', zone: 'zone-4', coords: [26.8620, 80.9230], level: 84.5, flow: 1250, pH: 7.2, ntu: 3.2 },
+    { name: 'District Lake Reservoir Intake', zone: 'zone-4', coords: [26.8620, 80.9230], level: 84.5, flow: 1250, pH: 7.2, ntu: 3.2 },
     { name: 'North Basin Water Treatment Plant', zone: 'zone-4', coords: [26.8650, 80.9270], level: 91.0, flow: 980, pH: 7.4, ntu: 1.1 },
     { name: 'Civil Lines Overhead Tank OHT-01', zone: 'zone-1', coords: [26.8540, 80.9440], level: 78.0, flow: 420, pH: 7.3, ntu: 0.9 },
     { name: 'Collectorate Pressure Regulating Valve', zone: 'zone-1', coords: [26.8510, 80.9395], level: 0, flow: 380, pressure: 3.4 },
@@ -298,7 +298,7 @@ export const generateInitialDevices = () => {
 
   // 6. Disaster & Flood Monitoring (10 devices)
   const floodStations = [
-    { name: 'Vasudha Barrage River Pylon', zone: 'zone-4', coords: [26.8615, 80.9235], level: 4.8, warn: 6.0, danger: 7.2 },
+    { name: 'District Barrage River Pylon', zone: 'zone-4', coords: [26.8615, 80.9235], level: 4.8, warn: 6.0, danger: 7.2 },
     { name: 'North Gomati Flood Warning Gauging Post', zone: 'zone-4', coords: [26.8660, 80.9280], level: 5.1, warn: 5.8, danger: 6.8 },
     { name: 'Nallah-3 Urban Storm Outfall Basin', zone: 'zone-2', coords: [26.8420, 80.9380], level: 2.9, warn: 3.2, danger: 4.0, status: 'warning' },
     { name: 'Industrial Sector Culvert Inundation Sensor', zone: 'zone-5', coords: [26.8280, 80.9560], level: 1.4, warn: 2.5, danger: 3.5 },
@@ -426,7 +426,7 @@ export const generateInitialDevices = () => {
 
   // 8. Public Infrastructure Health Sensors (10 devices)
   const infraAssets = [
-    { name: 'Vasudha Cable-Stayed Barrage Bridge Pier 3', zone: 'zone-4', coords: [26.8612, 80.9238], type: 'Bridge Structural Health', vib: 0.018, tilt: 0.02 },
+    { name: 'District Cable-Stayed Barrage Bridge Pier 3', zone: 'zone-4', coords: [26.8612, 80.9238], type: 'Bridge Structural Health', vib: 0.018, tilt: 0.02 },
     { name: 'Civil Lines Heritage Collectorate Annex Tower', zone: 'zone-1', coords: [26.8524, 80.9418], type: 'Historic Building Tilt & Crack', vib: 0.004, tilt: 0.01 },
     { name: 'Chowk Elevated Metro Viaduct Pier 42', zone: 'zone-2', coords: [26.8465, 80.9335], type: 'Mass Transit Viaduct Strain', vib: 0.025, tilt: 0.04 },
     { name: 'Cyber City Expressway Flyover Deck Span 7', zone: 'zone-5', coords: [26.8298, 80.9528], type: 'Expressway Flyover Expansion Joint', vib: 0.038, tilt: 0.05, warning: true },

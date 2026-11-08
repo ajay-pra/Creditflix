@@ -12,9 +12,9 @@ export const AIAssistantModal = ({ isOpen, onClose }) => {
     {
       id: "welcome",
       sender: "ai",
-      title: "Vasudha Intelligence Copilot Online",
+      title: "Creditfix Collectorate AI Copilot Online",
       content:
-        "Welcome, Officer. I am your operational AI decision assistant for Vasudha Smart District. I monitor cross-vertical IoT telemetry across irrigation, waste, traffic, water, flood, environment, and infrastructure. How may I assist your administration today?",
+        "Welcome, Officer. I am your operational AI decision assistant for Creditfix District Administration (Collectorate HQ). I monitor citizen grievances, file movements, review meeting agendas, and cross-vertical IoT telemetry across agriculture, waste, traffic, water, flood, and environment. How may I assist your administration today?",
       confidence: 100,
       timestamp: "Just now"
     }
@@ -58,7 +58,7 @@ export const AIAssistantModal = ({ isOpen, onClose }) => {
     <Modal
       isOpen={isOpen}
       onClose={onClose}
-      title="Vasudha AI District Intelligence Copilot"
+      title="Creditfix Collectorate AI Copilot • District Administration"
       maxWidth="max-w-3xl"
     >
       <div className="flex flex-col h-[560px]">
@@ -70,7 +70,7 @@ export const AIAssistantModal = ({ isOpen, onClose }) => {
             </div>
             <div>
               <div className="text-xs font-semibold text-slate-900 flex items-center gap-1.5">
-                Vasudha AI Copilot <span className="text-[10px] bg-purple-100 text-purple-800 font-mono px-1.5 py-0.5 rounded">v2.4-Simulated</span>
+                Creditfix Collectorate AI Copilot <span className="text-[10px] bg-purple-100 text-purple-800 font-mono px-1.5 py-0.5 rounded">v2.4-Simulated</span>
               </div>
               <div className="text-[11px] text-slate-500">Autonomous Edge Heuristics & Local Telemetry Ingestion</div>
             </div>

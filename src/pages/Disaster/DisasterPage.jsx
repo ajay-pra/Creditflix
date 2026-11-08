@@ -74,7 +74,7 @@ export const DisasterPage = () => {
     <div className="space-y-6">
       <Breadcrumb
         title="Disaster & Flood Hydrology Early Warning"
-        subtitle="Vasudha Gomati River Basin & Urban Storm Drainage Network • Dewatering Pump SCADA"
+        subtitle="Gomati River Basin & Urban Storm Drainage Network • Dewatering Pump SCADA"
         actions={
           <div className="flex items-center gap-2">
             <button
@@ -93,7 +93,7 @@ export const DisasterPage = () => {
       {/* KPI Cards */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
         <StatCard
-          title="Vasudha Barrage Level"
+          title="District Barrage Level"
           value={`${barrageStation?.waterLevelMeters} m`}
           subtext="Warning Mark: 6.00 m"
           icon={Waves}

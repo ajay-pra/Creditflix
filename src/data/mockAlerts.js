@@ -23,7 +23,7 @@ export const DEPARTMENTS = [
 
 export const INITIAL_INCIDENTS = [
   {
-    id: "VSD-INC-101",
+    id: "CFX-INC-101",
     title: "Critical Soil Moisture Deficit - Zone 03 Gomati Agro Beta",
     category: "irrigation",
     severity: "critical", // "critical" | "warning" | "info"
@@ -44,7 +44,7 @@ export const INITIAL_INCIDENTS = [
     recommendedAction: "Execute manual pump bypass or dispatch mobile tanker irrigation unit."
   },
   {
-    id: "VSD-INC-102",
+    id: "CFX-INC-102",
     title: "Smart Waste Bin Overflow Imminent - Central Mandi Gate 1",
     category: "waste",
     severity: "critical",
@@ -64,7 +64,7 @@ export const INITIAL_INCIDENTS = [
     recommendedAction: "Prioritize collection in active route UP-32-GV-4011."
   },
   {
-    id: "VSD-INC-103",
+    id: "CFX-INC-103",
     title: "High-Pressure Underground Water Main Leakage Suspected",
     category: "water",
     severity: "critical",
@@ -84,7 +84,7 @@ export const INITIAL_INCIDENTS = [
     recommendedAction: "Isolate Section 12 isolating valve V-12B and dispatch acoustic ground microphone team."
   },
   {
-    id: "VSD-INC-104",
+    id: "CFX-INC-104",
     title: "Severe Air Quality Deterioration (AQI 245 - Very Poor)",
     category: "environment",
     severity: "critical",
@@ -104,7 +104,7 @@ export const INITIAL_INCIDENTS = [
     recommendedAction: "Deploy anti-smog water mist cannon and inspect industrial stacks in Sector 8."
   },
   {
-    id: "VSD-INC-105",
+    id: "CFX-INC-105",
     title: "Rapid Runoff & Water Level Surge at Nallah-3 Storm Basin",
     category: "flood",
     severity: "critical",
@@ -124,7 +124,7 @@ export const INITIAL_INCIDENTS = [
     recommendedAction: "Keep 3 dewatering pumps running and verify sluice outfall clearance to Gomati River."
   },
   {
-    id: "VSD-INC-106",
+    id: "CFX-INC-106",
     title: "Severe Congestion & Bottleneck at Chowk Clock Tower",
     category: "traffic",
     severity: "warning",
@@ -144,7 +144,7 @@ export const INITIAL_INCIDENTS = [
     recommendedAction: "Dispatch traffic marshals for clearing illegal loading and enforce perimeter diversions."
   },
   {
-    id: "VSD-INC-107",
+    id: "CFX-INC-107",
     title: "Streetlight Circuit Breaker Trip on Market Central Ring",
     category: "lighting",
     severity: "warning",
@@ -164,7 +164,7 @@ export const INITIAL_INCIDENTS = [
     recommendedAction: "Test megger insulation resistance on Phase B underground cable."
   },
   {
-    id: "VSD-INC-108",
+    id: "CFX-INC-108",
     title: "Elevated Structural Vibration - Cyber City Flyover Span 7",
     category: "infrastructure",
     severity: "warning",
@@ -184,7 +184,7 @@ export const INITIAL_INCIDENTS = [
     recommendedAction: "Conduct bridge bearing inspection and restrict multi-axle vehicle speed to 30 km/h."
   },
   {
-    id: "VSD-INC-109",
+    id: "CFX-INC-109",
     title: "Citizen Grievance: Low Tap Water Pressure in Sector 14",
     category: "water",
     severity: "info",
@@ -203,7 +203,7 @@ export const INITIAL_INCIDENTS = [
     recommendedAction: "Inspect OHT-07 feeder booster valve PRV-9 pressure setting."
   },
   {
-    id: "VSD-INC-110",
+    id: "CFX-INC-110",
     title: "Biohazard Medical Waste Bin Collection Due - Civil Hospital",
     category: "waste",
     severity: "warning",

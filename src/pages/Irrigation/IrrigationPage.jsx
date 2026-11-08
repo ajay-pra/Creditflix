@@ -76,7 +76,7 @@ export const IrrigationPage = () => {
     <div className="space-y-6">
       <Breadcrumb
         title="Smart Irrigation & Precision Agriculture"
-        subtitle="Vasudha Agro Belt • Multi-Depth Soil Telemetry • Automated Solenoid & Pump SCADA"
+        subtitle="Rural Agro Belt • Multi-Depth Soil Telemetry • Automated Solenoid & Pump SCADA"
         actions={
           <div className="flex items-center gap-2">
             <button

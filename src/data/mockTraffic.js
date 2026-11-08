@@ -1,5 +1,5 @@
 // Smart Traffic & Transit Management Dataset
-// 8 Critical Intersections in Vasudha Smart District
+// 8 Critical Intersections in Creditfix District Administration
 
 export const INITIAL_INTERSECTIONS = [
   {

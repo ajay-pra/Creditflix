@@ -27,7 +27,7 @@ export const AppProvider = ({ children }) => {
   // 1. Initial State from LocalStorage or defaults
   const loadState = (key, fallback) => {
     try {
-      const saved = localStorage.getItem(`vasudha_${key}`);
+      const saved = localStorage.getItem(`creditfix_${key}`) || localStorage.getItem(`vasudha_${key}`);
       if (!saved || saved === "undefined" || saved === "null") return fallback;
       const parsed = JSON.parse(saved);
       if (Array.isArray(fallback) && (!Array.isArray(parsed) || parsed.length === 0)) {
@@ -84,18 +84,18 @@ export const AppProvider = ({ children }) => {
   // 2. Persist to LocalStorage on changes
   useEffect(() => {
     try {
-      localStorage.setItem("vasudha_devices", JSON.stringify(devices));
-      localStorage.setItem("vasudha_irrigation", JSON.stringify(irrigationZones));
-      localStorage.setItem("vasudha_wasteBins", JSON.stringify(wasteBins));
-      localStorage.setItem("vasudha_vehicles", JSON.stringify(vehicles));
-      localStorage.setItem("vasudha_traffic", JSON.stringify(intersections));
-      localStorage.setItem("vasudha_water", JSON.stringify(waterPoints));
-      localStorage.setItem("vasudha_env", JSON.stringify(envStations));
-      localStorage.setItem("vasudha_flood", JSON.stringify(floodStations));
-      localStorage.setItem("vasudha_lighting", JSON.stringify(lightingFeeders));
-      localStorage.setItem("vasudha_infra", JSON.stringify(infraAssets));
-      localStorage.setItem("vasudha_incidents", JSON.stringify(incidents));
-      localStorage.setItem("vasudha_aiRecs", JSON.stringify(aiRecommendations));
+      localStorage.setItem("creditfix_devices", JSON.stringify(devices));
+      localStorage.setItem("creditfix_irrigation", JSON.stringify(irrigationZones));
+      localStorage.setItem("creditfix_wasteBins", JSON.stringify(wasteBins));
+      localStorage.setItem("creditfix_vehicles", JSON.stringify(vehicles));
+      localStorage.setItem("creditfix_traffic", JSON.stringify(intersections));
+      localStorage.setItem("creditfix_water", JSON.stringify(waterPoints));
+      localStorage.setItem("creditfix_env", JSON.stringify(envStations));
+      localStorage.setItem("creditfix_flood", JSON.stringify(floodStations));
+      localStorage.setItem("creditfix_lighting", JSON.stringify(lightingFeeders));
+      localStorage.setItem("creditfix_infra", JSON.stringify(infraAssets));
+      localStorage.setItem("creditfix_incidents", JSON.stringify(incidents));
+      localStorage.setItem("creditfix_aiRecs", JSON.stringify(aiRecommendations));
     } catch (e) {
       console.warn("LocalStorage save error", e);
     }
@@ -330,7 +330,7 @@ export const AppProvider = ({ children }) => {
   };
 
   const createIncident = (incidentData) => {
-    const nextId = `VSD-INC-${110 + incidents.length + 1}`;
+    const nextId = `CFX-INC-${110 + incidents.length + 1}`;
     const newIncident = {
       id: nextId,
       createdAt: "Just now",

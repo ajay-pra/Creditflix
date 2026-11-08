@@ -1,10 +1,10 @@
 // Disaster & Flood Early Warning Dataset
-// 5 Hydrological & Flood Risk Stations in Vasudha Smart District
+// 5 Hydrological & Flood Risk Stations in Creditfix District Administration
 
 export const INITIAL_FLOOD_STATIONS = [
   {
     id: "FLD-001",
-    name: "Vasudha Barrage River Pylon Station",
+    name: "District Barrage River Pylon Station",
     zone: "zone-4",
     coordinates: [26.8615, 80.9235],
     waterLevelMeters: 4.82,
