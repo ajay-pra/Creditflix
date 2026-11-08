@@ -23,6 +23,7 @@ import { InfrastructurePage } from "./pages/Infrastructure/InfrastructurePage";
 import { DeviceManagementPage } from "./pages/DeviceManagement/DeviceManagementPage";
 import { AIIntelligencePage } from "./pages/AIIntelligence/AIIntelligencePage";
 import { IncidentsPage } from "./pages/Incidents/IncidentsPage";
+import { FilesPage } from "./pages/Files/FilesPage";
 import { ReportsPage } from "./pages/Reports/ReportsPage";
 import { SettingsPage } from "./pages/Settings/SettingsPage";
 
@@ -70,6 +71,7 @@ const MainLayout = () => {
               <Route path="/devices" element={<DeviceManagementPage />} />
               <Route path="/ai-intelligence" element={<AIIntelligencePage />} />
               <Route path="/incidents" element={<IncidentsPage />} />
+              <Route path="/files" element={<FilesPage />} />
               <Route path="/reports" element={<ReportsPage />} />
               <Route path="/settings" element={<SettingsPage />} />
               <Route path="*" element={<Navigate to="/" replace />} />

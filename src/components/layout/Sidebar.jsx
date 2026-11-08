@@ -14,6 +14,7 @@ import {
   Cpu,
   Sparkles,
   BellRing,
+  FileText,
   FileBarChart2,
   Settings,
   ChevronLeft,
@@ -35,7 +36,8 @@ export const NAV_ITEMS = [
   { path: "/infrastructure", label: "Infrastructure", icon: Building2 },
   { path: "/devices", label: "IoT Device Registry", icon: Cpu, countKey: "devices" },
   { path: "/ai-intelligence", label: "AI Forecasting", icon: Sparkles, highlight: true },
-  { path: "/incidents", label: "Incidents & Alerts", icon: BellRing, countKey: "incidents" },
+  { path: "/incidents", label: "Citizen Grievances", icon: BellRing, countKey: "incidents" },
+  { path: "/files", label: "e-Daftar File Tracker", icon: FileText, badge: "QR" },
   { path: "/reports", label: "Reports & Analytics", icon: FileBarChart2 },
   { path: "/settings", label: "Admin & Settings", icon: Settings }
 ];
