@@ -20,6 +20,7 @@ import {
 } from "lucide-react";
 
 export const EnvironmentPage = () => {
+  const { envStations, addToast } = useApp();
   const safeStations = envStations || [];
   const [selectedStation, setSelectedStation] = useState(() => (safeStations[5] || safeStations[0] || {}));
 
@@ -112,7 +113,7 @@ export const EnvironmentPage = () => {
           </div>
 
           <div className="space-y-3 max-h-[580px] overflow-y-auto pr-1">
-            {envStations.map((station) => (
+            {safeStations.map((station) => (
               <div
                 key={station.id}
                 onClick={() => setSelectedStation(station)}

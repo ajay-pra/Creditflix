@@ -5,6 +5,7 @@ import { Sidebar } from "./components/layout/Sidebar";
 import { TopNav } from "./components/layout/TopNav";
 import { ToastContainer } from "./components/common/ToastContainer";
 import { AIAssistantModal } from "./components/modals/AIAssistantModal";
+import { ErrorBoundary } from "./components/common/ErrorBoundary";
 
 // 15 Command Centre Pages
 import { OverviewPage } from "./pages/Overview/OverviewPage";
@@ -45,24 +46,26 @@ const MainLayout = () => {
         }`}
       >
         <div className="max-w-7xl mx-auto">
-          <Routes>
-            <Route path="/" element={<OverviewPage />} />
-            <Route path="/map" element={<CityMapPage />} />
-            <Route path="/irrigation" element={<IrrigationPage />} />
-            <Route path="/waste" element={<WastePage />} />
-            <Route path="/traffic" element={<TrafficPage />} />
-            <Route path="/water" element={<WaterPage />} />
-            <Route path="/environment" element={<EnvironmentPage />} />
-            <Route path="/disaster" element={<DisasterPage />} />
-            <Route path="/energy" element={<EnergyPage />} />
-            <Route path="/infrastructure" element={<InfrastructurePage />} />
-            <Route path="/devices" element={<DeviceManagementPage />} />
-            <Route path="/ai-intelligence" element={<AIIntelligencePage />} />
-            <Route path="/incidents" element={<IncidentsPage />} />
-            <Route path="/reports" element={<ReportsPage />} />
-            <Route path="/settings" element={<SettingsPage />} />
-            <Route path="*" element={<Navigate to="/" replace />} />
-          </Routes>
+          <ErrorBoundary>
+            <Routes>
+              <Route path="/" element={<OverviewPage />} />
+              <Route path="/map" element={<CityMapPage />} />
+              <Route path="/irrigation" element={<IrrigationPage />} />
+              <Route path="/waste" element={<WastePage />} />
+              <Route path="/traffic" element={<TrafficPage />} />
+              <Route path="/water" element={<WaterPage />} />
+              <Route path="/environment" element={<EnvironmentPage />} />
+              <Route path="/disaster" element={<DisasterPage />} />
+              <Route path="/energy" element={<EnergyPage />} />
+              <Route path="/infrastructure" element={<InfrastructurePage />} />
+              <Route path="/devices" element={<DeviceManagementPage />} />
+              <Route path="/ai-intelligence" element={<AIIntelligencePage />} />
+              <Route path="/incidents" element={<IncidentsPage />} />
+              <Route path="/reports" element={<ReportsPage />} />
+              <Route path="/settings" element={<SettingsPage />} />
+              <Route path="*" element={<Navigate to="/" replace />} />
+            </Routes>
+          </ErrorBoundary>
         </div>
       </main>
 
@@ -81,7 +84,7 @@ const MainLayout = () => {
 export default function App() {
   return (
     <AppProvider>
-      <BrowserRouter>
+      <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
         <MainLayout />
       </BrowserRouter>
     </AppProvider>

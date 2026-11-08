@@ -17,6 +17,7 @@ import {
 } from "lucide-react";
 
 export const InfrastructurePage = () => {
+  const { infraAssets, addToast } = useApp();
   const safeAssets = infraAssets || [];
   const [selectedAsset, setSelectedAsset] = useState(() => (safeAssets[3] || safeAssets[0] || {}));
   const [typeFilter, setTypeFilter] = useState("all");
