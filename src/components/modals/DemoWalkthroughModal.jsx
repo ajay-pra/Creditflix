@@ -15,18 +15,45 @@ import {
   ArrowRight,
   ExternalLink,
   BookOpen,
-  FileText
+  FileText,
+  MessageSquare,
+  QrCode
 } from "lucide-react";
 
 export const DemoWalkthroughModal = ({ isOpen, onClose }) => {
   const navigate = useNavigate();
-  const { addToast } = useApp();
+  const { addToast, setIsWhatsAppBotOpen } = useApp();
   const [activeTab, setActiveTab] = useState("scenarios");
 
   const DEMO_SCENARIOS = [
     {
+      id: "files",
+      title: "Scenario 1: e-Daftar Physical File Tracking & Desk Dwell Bottlenecks",
+      sector: "Collectorate Administration",
+      icon: FileText,
+      color: "blue",
+      path: "/files",
+      description:
+        "Inspect physical paper dockets tracked via QR barcodes. Identify File #FILE-REV-2026-0891 stalled for 86 hours on Desk #3 (Sadar Tehsil), view the complete chain-of-custody transfer log, and issue an administrative show-cause notice.",
+      keyMetrics: "QR Code Barcoding • Desk Dwell Timers • 48h SLA Threshold • Chain-of-Custody",
+      assessmentAlignment: "Zero-typing clerical adoption & paper file bottleneck accountability"
+    },
+    {
+      id: "whatsapp",
+      title: "Scenario 2: Multilingual Citizen WhatsApp AI Grievance Intake",
+      sector: "Citizen Services & Jan Sunwai",
+      icon: MessageSquare,
+      color: "emerald",
+      isAction: "whatsapp",
+      path: "/incidents",
+      description:
+        "Simulate citizen grievance submission on WhatsApp in colloquial Hindi ('सदर बाजार में नाला चोक और गंदा पानी'). Watch real-time Indic NLP parsing extract department, assign the nodal officer, generate ticket #CFX-INC-111, and send WhatsApp confirmation.",
+      keyMetrics: "Colloquial Hindi/English • Indic NLP Entity Extraction • Instant Live Ticket Dispatch",
+      assessmentAlignment: "Frontline citizen accessibility & automated department routing"
+    },
+    {
       id: "irrigation",
-      title: "Scenario 1: Smart Irrigation & Soil Moisture Predictive Dispatch",
+      title: "Scenario 3: Smart Irrigation & Soil Moisture Predictive Dispatch",
       sector: "Agriculture & Green Spaces",
       icon: Droplets,
       color: "emerald",
@@ -38,7 +65,7 @@ export const DemoWalkthroughModal = ({ isOpen, onClose }) => {
     },
     {
       id: "waste",
-      title: "Scenario 2: Smart Waste Overflow & TSP Fleet Route Optimization",
+      title: "Scenario 4: Smart Waste Overflow & TSP Fleet Route Optimization",
       sector: "Solid Waste Management",
       icon: Trash2,
       color: "amber",
@@ -49,20 +76,8 @@ export const DemoWalkthroughModal = ({ isOpen, onClose }) => {
       assessmentAlignment: "Predictive logistics, municipal cost savings & route optimization"
     },
     {
-      id: "traffic",
-      title: "Scenario 3: SCATS Adaptive Signal & Congestion Clearance",
-      sector: "Urban Mobility",
-      icon: Car,
-      color: "blue",
-      path: "/traffic",
-      description:
-        "Junction 03 (Civil Lines / Mall Road) experiences acute 88% congestion density. Switch from fixed timer mode to SCATS Dynamic Split, prioritizing eastbound arterial flow with automated green-phase cascading.",
-      keyMetrics: "8 SCATS Intersections • Doppler Radar Vehicle Flow • Live Phase Timers",
-      assessmentAlignment: "Real-time edge actuator telemetry & adaptive urban control"
-    },
-    {
       id: "water",
-      title: "Scenario 4: Water Supply Pipeline Anomaly & Burst Isolation",
+      title: "Scenario 5: Water Supply Pipeline Anomaly & Burst Isolation",
       sector: "Water Utilities",
       icon: AlertTriangle,
       color: "cyan",
@@ -71,24 +86,16 @@ export const DemoWalkthroughModal = ({ isOpen, onClose }) => {
         "Electromagnetic flow meter FM-04 registers a severe negative flow deviation (310 kL/h vs 450 kL/h baseline) indicating a subterranean main rupture. Walk through remote motorized sluice valve closure.",
       keyMetrics: "Pipeline Section 12 • 450 kL/h nominal • Motorized Sluice SG-04",
       assessmentAlignment: "Real-time anomaly detection, infrastructure protection & audit logging"
-    },
-    {
-      id: "environment",
-      title: "Scenario 5: Nocturnal AQI Inversion & Anti-Smog Cannon Logistics",
-      sector: "Ambient Air Quality",
-      icon: Wind,
-      color: "teal",
-      path: "/environment",
-      description:
-        "Continuous Ambient Air Quality Monitoring Station (CAAQMS-06) detects microclimate stagnation in Industrial Sector 8 (AQI 280, PM2.5 165 µg/m³). Deploy municipal mobile anti-smog water cannons.",
-      keyMetrics: "8 CAAQMS Stations • Laser Particulate Spectrometry • Microclimate Wind Radar",
-      assessmentAlignment: "Environmental forecasting, citizen health protection & inter-agency coordination"
     }
   ];
 
   const handleLaunchScenario = (scenario) => {
     onClose();
-    navigate(scenario.path);
+    if (scenario.isAction === "whatsapp") {
+      setIsWhatsAppBotOpen(true);
+    } else {
+      navigate(scenario.path);
+    }
     addToast(
       `Live Demo: ${scenario.title}`,
       `Navigated to ${scenario.sector} module. Follow the guided interactive controls.`,

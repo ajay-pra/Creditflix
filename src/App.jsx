@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { HashRouter, Routes, Route, Navigate } from "react-router-dom";
 import { AppProvider, useApp } from "./context/AppContext";
 import { Sidebar } from "./components/layout/Sidebar";
 import { TopNav } from "./components/layout/TopNav";
@@ -107,9 +107,9 @@ const MainLayout = () => {
 export default function App() {
   return (
     <AppProvider>
-      <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
+      <HashRouter>
         <MainLayout />
-      </BrowserRouter>
+      </HashRouter>
     </AppProvider>
   );
 }

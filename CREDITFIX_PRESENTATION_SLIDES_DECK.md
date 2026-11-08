@@ -217,8 +217,9 @@
 * **The Delivered Working Proof:** *Creditfix District Administration Command Centre*
 * **What We Built & Shipped:**
   * Full-stack web application built with React 18, Vite, Tailwind CSS, Leaflet GIS, Recharts, and Framer Motion.
-  * **15 Complete Functional Modules:** Command Centre, GIS Map, Smart Irrigation, Solid Waste, Traffic, Water SCADA, Air Quality, Flood Early Warning, Streetlights, Infrastructure SHM, IoT Registry, AI Forecasting, Incidents, Reports, Settings.
+  * **Dedicated e-Daftar Physical File Tracker (`/files`):** Real-time monitoring of paper jackets with QR codes, desk dwell time calculations, and `BOTTLENECK (>72H)` alerts.
   * **Interactive WhatsApp Citizen AI Bot Simulator:** Type or click colloquial Hindi/English grievances; watch real-time NLP classification, auto-assignment, and ticket generation into live state.
+  * **15 Complete Functional Modules:** Command Centre, GIS Map, e-Daftar File Tracker, Smart Irrigation, Solid Waste, Traffic, Water SCADA, Air Quality, Flood Early Warning, Streetlights, Infrastructure SHM, IoT Registry, AI Forecasting, Incidents, Reports, Settings.
   * **Deterministic Simulation Engine:** Live telemetry drift across 100 devices with zero external dependencies.
 * **Speaker Notes:**
   > "Now, let us move from theory to reality. I invite the panel to observe our live working prototype—a fully responsive, government-grade Command Centre built specifically for this assessment."
@@ -229,13 +230,15 @@
 * **Step 1: Top Navigation Bar** $\rightarrow$ Click **"Citizen WhatsApp"** button.
   * Select prompt: *"सदर तहसील मुख्य बाजार में 3 दिन से नाला चोक है और सड़कों पर गंदा पानी भरा हुआ है।"*
   * Observe: LLM extracts Category (*Municipal Drainage*), Officer (*Executive Officer, Nagar Palika*), SLA (*24h*), registers ticket `#CFX-INC-111`, and sends WhatsApp reply!
-* **Step 2: Overview Command Dashboard** $\rightarrow$ Watch the new ticket appear live on the Incident Table and Overview KPI cards.
-* **Step 3: AI Copilot Dialog** $\rightarrow$ Click **"AI Copilot"** $\rightarrow$ Click *"Prepare Monday Morning Review Meeting (Samiksha Baithak) agenda for the DM"*.
+* **Step 2: e-Daftar File Tracker** $\rightarrow$ Click **"e-Daftar File Tracker"** in the sidebar (or visit `/files`).
+  * Show file `FILE-REV-2026-0891` (Land Mutation, Vill. Raipur) dwelling for 86 hours on Desk #3 (Sadar Tehsil Peshi).
+  * Click **"Show-Cause Alert"** to demonstrate automated clerical bottleneck accountability, or click **"View Custody"** to see the full historical movement timeline.
+* **Step 3: AI Copilot Dialog** $\rightarrow$ Click **"AI Copilot"** in the header $\rightarrow$ Click *"Prepare Monday Morning Review Meeting (Samiksha Baithak) agenda for the DM"*.
   * Observe: Synthesizes department bottlenecks, flags Jal Nigam pipe burst, and drafts executive action points.
 * **Step 4: Smart Irrigation SCADA** $\rightarrow$ Navigate to `/irrigation` $\rightarrow$ Turn on Pump PMP-04 $\rightarrow$ Observe mandatory **SCADA Confirmation Modal** preventing accidental actuator activation.
 * **Step 5: Reports & Analytics** $\rightarrow$ Export CSV and formatted printable executive briefing pack.
 * **Speaker Notes:**
-  > "In 5 minutes, we have demonstrated citizen WhatsApp intake, automated NLP triage, executive review synthesis, SCADA safety interlocks, and printable governance reports."
+  > "In 5 minutes, we have demonstrated citizen WhatsApp intake, automated NLP triage, physical file dwell tracking, executive review synthesis, SCADA safety interlocks, and printable governance reports."
 
 ---
 
