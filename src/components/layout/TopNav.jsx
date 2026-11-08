@@ -17,9 +17,6 @@ import {
 } from "lucide-react";
 import { useApp, DEMO_ROLES } from "../../context/AppContext";
 import { useNavigate } from "react-router-dom";
-import { DemoWalkthroughModal } from "../modals/DemoWalkthroughModal";
-import { CitizenWhatsAppBotModal } from "../modals/CitizenWhatsAppBotModal";
-
 export const TopNav = ({ isSidebarCollapsed }) => {
   const {
     districtInfo,
@@ -33,7 +30,11 @@ export const TopNav = ({ isSidebarCollapsed }) => {
     globalSearch,
     setGlobalSearch,
     incidents,
-    setIsAIAssistantOpen
+    setIsAIAssistantOpen,
+    isWhatsAppBotOpen,
+    setIsWhatsAppBotOpen,
+    isDemoWalkthroughOpen,
+    setIsDemoWalkthroughOpen
   } = useApp();
 
   const navigate = useNavigate();
@@ -41,8 +42,6 @@ export const TopNav = ({ isSidebarCollapsed }) => {
   const [dateString, setDateString] = useState("");
   const [isRoleDropdownOpen, setIsRoleDropdownOpen] = useState(false);
   const [isSearchFocused, setIsSearchFocused] = useState(false);
-  const [isDemoWalkthroughOpen, setIsDemoWalkthroughOpen] = useState(false);
-  const [isWhatsAppBotOpen, setIsWhatsAppBotOpen] = useState(false);
 
   // Live Clock updater
   useEffect(() => {
@@ -269,18 +268,6 @@ export const TopNav = ({ isSidebarCollapsed }) => {
           </div>
         </div>
       </div>
-
-      {/* Creditfix Assessment Demo Walkthrough Modal */}
-      <DemoWalkthroughModal
-        isOpen={isDemoWalkthroughOpen}
-        onClose={() => setIsDemoWalkthroughOpen(false)}
-      />
-
-      {/* Citizen WhatsApp AI Grievance Intake Simulator */}
-      <CitizenWhatsAppBotModal
-        isOpen={isWhatsAppBotOpen}
-        onClose={() => setIsWhatsAppBotOpen(false)}
-      />
     </header>
   );
 };

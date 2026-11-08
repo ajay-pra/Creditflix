@@ -5,6 +5,8 @@ import { Sidebar } from "./components/layout/Sidebar";
 import { TopNav } from "./components/layout/TopNav";
 import { ToastContainer } from "./components/common/ToastContainer";
 import { AIAssistantModal } from "./components/modals/AIAssistantModal";
+import { DemoWalkthroughModal } from "./components/modals/DemoWalkthroughModal";
+import { CitizenWhatsAppBotModal } from "./components/modals/CitizenWhatsAppBotModal";
 import { ErrorBoundary } from "./components/common/ErrorBoundary";
 
 // 15 Command Centre Pages
@@ -26,7 +28,14 @@ import { SettingsPage } from "./pages/Settings/SettingsPage";
 
 const MainLayout = () => {
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
-  const { isAIAssistantOpen, setIsAIAssistantOpen } = useApp();
+  const {
+    isAIAssistantOpen,
+    setIsAIAssistantOpen,
+    isWhatsAppBotOpen,
+    setIsWhatsAppBotOpen,
+    isDemoWalkthroughOpen,
+    setIsDemoWalkthroughOpen
+  } = useApp();
 
   return (
     <div className="min-h-screen bg-slate-50 text-slate-800 flex flex-col font-sans">
@@ -76,6 +85,18 @@ const MainLayout = () => {
       <AIAssistantModal
         isOpen={isAIAssistantOpen}
         onClose={() => setIsAIAssistantOpen(false)}
+      />
+
+      {/* Creditfix Assessment Demo Walkthrough Modal */}
+      <DemoWalkthroughModal
+        isOpen={isDemoWalkthroughOpen}
+        onClose={() => setIsDemoWalkthroughOpen(false)}
+      />
+
+      {/* Citizen WhatsApp AI Grievance Intake Simulator */}
+      <CitizenWhatsAppBotModal
+        isOpen={isWhatsAppBotOpen}
+        onClose={() => setIsWhatsAppBotOpen(false)}
       />
     </div>
   );

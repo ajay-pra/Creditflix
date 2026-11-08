@@ -182,7 +182,7 @@ export const CitizenWhatsAppBotModal = ({ isOpen, onClose }) => {
             </div>
           </div>
 
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 pr-8">
             <span className="text-xs font-mono bg-slate-100 text-slate-700 px-2.5 py-1 rounded-lg border border-slate-200">
               +91 94150 XXXXX
             </span>
@@ -344,3 +344,4 @@ export const CitizenWhatsAppBotModal = ({ isOpen, onClose }) => {
     </Modal>
   );
 };
+

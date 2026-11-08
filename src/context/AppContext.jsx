@@ -64,6 +64,8 @@ export const AppProvider = ({ children }) => {
   const [selectedZoneFilter, setSelectedZoneFilter] = useState("all");
   const [activeRoute, setActiveRoute] = useState(null);
   const [isAIAssistantOpen, setIsAIAssistantOpen] = useState(false);
+  const [isWhatsAppBotOpen, setIsWhatsAppBotOpen] = useState(false);
+  const [isDemoWalkthroughOpen, setIsDemoWalkthroughOpen] = useState(false);
 
   // Simulation engine instance ref
   const simEngineRef = useRef(null);
@@ -417,6 +419,10 @@ export const AppProvider = ({ children }) => {
         setActiveRoute,
         isAIAssistantOpen,
         setIsAIAssistantOpen,
+        isWhatsAppBotOpen,
+        setIsWhatsAppBotOpen,
+        isDemoWalkthroughOpen,
+        setIsDemoWalkthroughOpen,
         setActuatorState,
         acknowledgeIncident,
         assignIncident,
